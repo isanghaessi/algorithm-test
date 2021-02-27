@@ -1,0 +1,35 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u44032 \uc0\u51109  \uc0\u44596  \uc0\u54064 \uc0\u47536 \uc0\u46300 \uc0\u47212  \uc0\u48512 \uc0\u48516  \uc0\u47928 \uc0\u51088 \uc0\u50676 \uc0\u51012  \uc0\u52636 \uc0\u47141 \uc0\u54616 \uc0\u46972 .\
+\
+Input: s = "babad"\
+Output: "bab"\
+\	Note: "aba" is also a valid answer.\
+\
+Input: s = "cbbd"\
+Output: "bb"\
+\
+1.\uc0\u51473 \uc0\u50521 \uc0\u51012  \uc0\u51473 \uc0\u49900 \uc0\u51004 \uc0\u47196  \uc0\u54869 \uc0\u51109 \
+def longestPalindrome(s: str) -> str:\
+    def expand(left: int, right, int) -> str:\
+        while left >= 0 and right <= len(s) and s[left] = s[right - 1]:\
+            left -= 1\
+            right += 1\
+    return s[left + 1:right - 1]\
+    if(len(s) < 2 or s == s[::-1]:\
+        return s\
+\
+\	\
+\
+\
+\
+\
+\
+\
+\
+\
+}
