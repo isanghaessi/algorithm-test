@@ -1,0 +1,64 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{disc\}}{\leveltext \'01\'95}{\levelnumbers;}\fi-500\li0\lin0}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{circle\}}{\leveltext \'01\uc0\u9702 _;}{\levelnumbers;}\fi-500\li500\lin500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{diamond\}}{\leveltext \'01\uc0\u9656 _;}{\levelnumbers;}\fi-500\li1000\lin1000}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{disc\}}{\leveltext \'01\'95}{\levelnumbers;}\fi-500\li1500\lin1500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{circle\}}{\leveltext \'01\uc0\u9702 _;}{\levelnumbers;}\fi-500\li2000\lin2000}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{diamond\}}{\leveltext \'01\uc0\u9656 _;}{\levelnumbers;}\fi-500\li2500\lin2500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{disc\}}{\leveltext \'01\'95}{\levelnumbers;}\fi-500\li3000\lin3000}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{circle\}}{\leveltext \'01\uc0\u9702 _;}{\levelnumbers;}\fi-500\li3500\lin3500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{diamond\}}{\leveltext \'01\uc0\u9656 _;}{\levelnumbers;}\fi-500\li4000\lin4000}
+{\listname ;}\listid1950704149}
+}
+{\*\listoverridetable{\listoverride\listid1950704149\listoverridecount0\ls1950704149}}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u50669 \uc0\u49692 \uc0\u51004 \uc0\u47196  \uc0\u51200 \uc0\u51109 \uc0\u46108  \uc0\u50672 \uc0\u44208  \uc0\u47532 \uc0\u49828 \uc0\u53944 \uc0\u51032  \uc0\u49707 \uc0\u51088 \uc0\u47484  \uc0\u45908 \uc0\u54616 \uc0\u46972 .\
+\
+Input: l1 = [2,4,3], l2 = [5,6,4]\
+Output: [7,0,8]\
+\
+\
+# Definition for singly-linked list.\
+# class ListNode:\
+#     def __init__(self, val=0, next=None):\
+#         self.val = val\
+#         self.next = next\
+\
+1.\uc0\u48652 \uc0\u47336 \uc0\u53944  \uc0\u54252 \uc0\u49828 \
+class Solution:\
+    def toList(self, head: ListNode) -> List[str]:\
+        result = []\
+        while head:\
+            result.append(str(head.val))\
+            head = head.next\
+        return result\
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:\
+        result = None\
+        left = int(''.join(self.toList(l1)[::-1]))\
+        right = int(''.join(self.toList(l2)[::-1]))\
+        for c in str(left + right):\
+            result = ListNode(val = int(c), next = result)\
+        return result\
+\
+2.\uc0\u51204 \uc0\u44032 \uc0\u49328 \uc0\u44592  \uc0\u54876 \uc0\u50857 \
+class Solution:\
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:\
+        root = head = ListNode(0)\
+        carry = 0\
+        while l1 or l2 or carry:\
+            sum = 0\
+            if l1:\
+                sum += l1.val\
+                l1 = l1.next\
+            if l2:\
+                sum += l2.val\
+                l2 = l2.next\
+            carry, val = divmod(sum + carry, 10)\
+            head.next = ListNode(val = val)\
+            head = head.next\
+        return root.next\
+       \
+\pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi-1000\li2000
+\ls1950704149\ilvl2{\listtext    \uc0\u9656    }\uc0\u44032 \uc0\u49328 \uc0\u44592  \uc0\u50508 \uc0\u44256 \uc0\u47532 \uc0\u51608  \uc0\u54876 \uc0\u50857 \uc0\u54616 \uc0\u50668  carry on\uc0\u51012  \uc0\u52376 \uc0\u47532 \uc0\u54616 \uc0\u47728  \uc0\u44228 \uc0\u49328 \uc0\u54620 \uc0\u45796 . }
