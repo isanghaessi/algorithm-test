@@ -1,0 +1,28 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u47588 \uc0\u51068 \uc0\u51032  \uc0\u54868 \uc0\u50472  \uc0\u50728 \uc0\u46020  \uc0\u47532 \uc0\u49828 \uc0\u53944  T\uc0\u47484  \uc0\u51077 \uc0\u47141 \uc0\u48155 \uc0\u50500 \uc0\u49436 , \uc0\u45908  \uc0\u46384 \uc0\u46907 \uc0\u54620  \uc0\u45216 \uc0\u50472 \uc0\u47484  \uc0\u50948 \uc0\u54644 \uc0\u49436 \uc0\u45716  \uc0\u47728 \uc0\u52832 \uc0\u51012  \uc0\u45908  \uc0\u44592 \uc0\u45796 \uc0\u47140 \uc0\u50556  \uc0\u54616 \uc0\u45716 \uc0\u51648 \uc0\u47484  \uc0\u52636 \uc0\u47141 \uc0\u54616 \uc0\u46972 .\
+\
+Input: T = [73, 74, 75, 71, 69, 72, 76, 73]\
+Output: [1, 1, 4, 2, 1, 1, 0, 0]\
+\
+1. \uc0\u49828 \uc0\u53469 \
+class Solution:\
+    def dailyTemperatures(self, T: List[int]) -> List[int]:\
+        result = [0] * len(T)\
+        stack = []\
+        for i, cur in enumerate(T):\
+            while stack and cur > T[stack[-1]]:\
+                last = stack.pop()\
+                result[last] = i - last\
+            stack.append(i)\
+        return result\
+\
+\
+\
+\
+\
+}

@@ -1,0 +1,54 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u44292 \uc0\u54840 \uc0\u47196  \uc0\u46108  \uc0\u51077 \uc0\u47141 \uc0\u44050 \uc0\u51060  \uc0\u50732 \uc0\u48148 \uc0\u47480 \uc0\u51648  \uc0\u54032 \uc0\u45800 \uc0\u54616 \uc0\u46972 .\
+\
+Input: s = "()"\
+Output: true\
+\
+1.\uc0\u48176 \uc0\u50676 \
+class Solution:\
+    def isValid(self, s: str) -> bool:\
+        b1 ='()'\
+        b2 = '\{\}'\
+        b3 = '[]'\
+        stack = []\
+        for c in s:\
+            if c in b1:\
+                temp = b1\
+            elif c in b2:\
+                temp = b2\
+            elif c in b3:\
+                temp = b3\
+            if c == temp[0]:\
+                stack.append(c)\
+            elif len(stack) and stack.pop() in temp:\
+                continue\
+            else:\
+                return False\
+        if len(stack):\
+            return False\
+        else:\
+            return True\
+\
+2. \uc0\u46357 \uc0\u49492 \uc0\u45320 \uc0\u47532 \
+class Solution:\
+    def isValid(self, s: str) -> bool:\
+        table = \{'(': ')', '\{': '\}', '[': ']'\}\
+        stack = []\
+        for c in s:\
+            if c in table:\
+                stack.append(c)\
+            else:\
+                if len(stack) == 0 or table[stack.pop()] != c:\
+                    return False\
+        return len(stack) == 0\
+\
+\
+\
+\
+\
+}

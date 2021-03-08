@@ -1,0 +1,57 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+k\uc0\u44060 \uc0\u51032  \uc0\u51221 \uc0\u47148 \uc0\u46108  \uc0\u47532 \uc0\u49828 \uc0\u53944 \uc0\u47484  1\uc0\u44060 \uc0\u51032  \uc0\u51221 \uc0\u47148 \uc0\u46108  \uc0\u47532 \uc0\u49828 \uc0\u53944 \uc0\u47196  \uc0\u48337 \uc0\u54633 \uc0\u54616 \uc0\u46972 .\
+\
+Input: lists = [[1,4,5],[1,3,4],[2,6]]\
+Output: [1,1,2,3,4,4,5,6]\
+Explanation: The linked-lists are:\
+[\
+  1->4->5,\
+  1->3->4,\
+  2->6\
+]\
+merging them into one sorted list:\
+1->1->2->3->4->4->5->6\
+\
+# Definition for singly-linked list.\
+# class ListNode:\
+#     def __init__(self, val=0, next=None):\
+#         self.val = val\
+#         self.next = next\
+\
+1.\uc0\u48652 \uc0\u47336 \uc0\u53944  \uc0\u54252 \uc0\u49828 \
+class Solution:\
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode:\
+        _list = []\
+        for i in lists:\
+            while i:\
+                _list.append(i.val)\
+                i = i.next\
+        _list.sort()\
+        _list.reverse()\
+        result = None\
+        for i in _list:\
+            result = ListNode(i, result)\
+        return result\
+\
+2.heapq \uc0\u54876 \uc0\u50857 \
+class Solution:\
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode:\
+        root = result = ListNode(None)\
+        heap = []\
+        for i in range(len(lists)):\
+            if lists[i]:\
+                heapq.heappush(heap, (lists[i].val, i, lists[i]))\
+        while heap:\
+            node = heapq.heappop(heap)\
+            idx = node[1]\
+            result.next = node[2]\
+            result = result.next\
+            if result.next:\
+                heapq.heappush(heap, (result.next.val, idx, result.next))\
+        return root.next\
+}

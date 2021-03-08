@@ -1,0 +1,226 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{disc\}}{\leveltext \'01\'95}{\levelnumbers;}\fi-500\li0\lin0}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{circle\}}{\leveltext \'01\uc0\u9702 _;}{\levelnumbers;}\fi-500\li500\lin500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{diamond\}}{\leveltext \'01\uc0\u9656 _;}{\levelnumbers;}\fi-500\li1000\lin1000}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{disc\}}{\leveltext \'01\'95}{\levelnumbers;}\fi-500\li1500\lin1500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{circle\}}{\leveltext \'01\uc0\u9702 _;}{\levelnumbers;}\fi-500\li2000\lin2000}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{diamond\}}{\leveltext \'01\uc0\u9656 _;}{\levelnumbers;}\fi-500\li2500\lin2500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{disc\}}{\leveltext \'01\'95}{\levelnumbers;}\fi-500\li3000\lin3000}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{circle\}}{\leveltext \'01\uc0\u9702 _;}{\levelnumbers;}\fi-500\li3500\lin3500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{diamond\}}{\leveltext \'01\uc0\u9656 _;}{\levelnumbers;}\fi-500\li4000\lin4000}
+{\listname ;}\listid-890612444}
+}
+{\*\listoverridetable{\listoverride\listid-890612444\listoverridecount0\ls-890612444}}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u45796 \uc0\u51020 \uc0\u51032  \uc0\u44592 \uc0\u45733 \uc0\u51012  \uc0\u51228 \uc0\u44277 \uc0\u54616 \uc0\u45716  \uc0\u54644 \uc0\u49884 \uc0\u47605 \uc0\u51012  \uc0\u46356 \uc0\u51088 \uc0\u51064 \uc0\u54616 \uc0\u46972 .\
+\
+\uc0\u8226 \	put(key, value) :\uc0\u160 Insert a (key, value) pair into the HashMap. If the value already exists in the HashMap, update the value.\
+\uc0\u8226 \	get(key): Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key.\
+\uc0\u8226 \	remove(key) :\uc0\u160 Remove the mapping for the value key if this map contains the mapping for the key.\
+\
+1.collections.defaultdict\
+class ListNode:\
+    def __init__(self, key = None, value = None):\
+        self.key = key\
+        self.value = value\
+        self.next = None\
+\
+class MyHashMap:\
+\
+    def __init__(self):\
+        """\
+        Initialize your data structure here.\
+        """\
+        self.size = 1000\
+        self.table = collections.defaultdict(ListNode)\
+\
+    def put(self, key: int, value: int) -> None:\
+        """\
+        value will always be non-negative.\
+        """\
+        index = key % self.size\
+        if self.table[index].key is not None:\
+            node = self.table[index]\
+            while node:\
+                if node.key == key:\
+                    node.value = value\
+                    return\
+                elif not node.next:\
+                    node.next = ListNode(key, value)\
+                    return\
+                node = node.next\
+        else:\
+            self.table[index] = ListNode(key, value)\
+        return\
+        \
+\
+    def get(self, key: int) -> int:\
+        """\
+        Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key\
+        """\
+        index = key % self.size\
+        if self.table[index].key is not None:\
+            node = self.table[index]\
+            while node:\
+                if node.key == key:\
+                    return node.value\
+                node = node.next\
+        return -1\
+        \
+\
+    def remove(self, key: int) -> None:\
+        """\
+        Removes the mapping of the specified value key if this map contains a mapping for the key\
+        """\
+        index = key % self.size\
+        if self.table[index].key is not None:\
+            prev, node = None, self.table[index]\
+            while node:\
+                if node.key == key:\
+                    if not prev:\
+                        self.table[index] = ListNode() if not node.next else node.next\
+                        return\
+                    else:\
+                        prev.next = node.next\
+                        return\
+                prev, node = node, node.next\
+        return\
+        \
+\
+\
+# Your MyHashMap object will be instantiated and called as such:\
+# obj = MyHashMap()\
+# obj.put(key,value)\
+# param_2 = obj.get(key)\
+# obj.remove(key)\
+\
+\pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi-1000\li2000
+\ls-890612444\ilvl2{\listtext    \uc0\u9656    }defaultdict\uc0\u47484  \uc0\u49324 \uc0\u50857 \uc0\u54644 \uc0\u49436  \uc0\u50724 \uc0\u47448 \uc0\u47484  \uc0\u51460 \uc0\u51060 \uc0\u51088 \
+\ls-890612444\ilvl2{\listtext    \uc0\u9656    }None, 0 \uc0\u44284 \uc0\u44057 \uc0\u51008  False\uc0\u44057 \uc0\u51008 \uc0\u44050 \uc0\u51012  \uc0\u51452 \uc0\u51032 \uc0\u54616 \uc0\u51088 \
+\pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\
+2.\uc0\u44592 \uc0\u48376  \uc0\u46357 \uc0\u49492 \uc0\u45320 \uc0\u47532 \
+class ListNode:\
+    def __init__(self, key = None, value = None):\
+        self.key = key\
+        self.value = value\
+        self.next = None\
+\
+class MyHashMap:\
+\
+    def __init__(self):\
+        """\
+        Initialize your data structure here.\
+        """\
+        self.size = 1000\
+        self.table = \{\}\
+        \
+        \
+    def _del_node(self, head: ListNode, key: int) -> ListNode:\
+        prev, node = None, head\
+        while node:\
+            if node.key == key:\
+                if not prev:\
+                    head = node.next\
+                else:\
+                    prev.next = node.next\
+                return head\
+            prev, node = node, node.next\
+        return head\
+        \
+\
+    def put(self, key: int, value: int) -> None:\
+        """\
+        value will always be non-negative.\
+        """\
+        index = key % self.size\
+        if index in self.table:\
+            node = self.table[index]\
+            while node:\
+                if node.key == key:\
+                    node.value = value\
+                    return\
+                elif not node.next:\
+                    node.next = ListNode(key, value)\
+                    return\
+                node = node.next\
+        else:\
+            self.table[index] = ListNode(key, value)\
+            return\
+        \
+\
+    def get(self, key: int) -> int:\
+        """\
+        Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key\
+        """\
+        index = key % self.size\
+        if index in self.table:\
+            node = self.table[index]\
+            while node:\
+                if node.key == key:\
+                    return node.value\
+                node = node.next\
+        return -1\
+        \
+\
+    def remove(self, key: int) -> None:\
+        """\
+        Removes the mapping of the specified value key if this map contains a mapping for the key\
+        """\
+        index = key % self.size\
+        if index in self.table:\
+            self.table[index] = self._del_node(self.table[index], key)\
+            if not self.table[index]:\
+                del self.table[index]\
+        return\
+\
+\
+\
+# Your MyHashMap object will be instantiated and called as such:\
+# obj = MyHashMap()\
+# obj.put(key,value)\
+# param_2 = obj.get(key)\
+# obj.remove(key)\
+\
+3.\uc0\u46357 \uc0\u49492 \uc0\u45320 \uc0\u47532 \
+class MyHashMap:\
+\
+    def __init__(self):\
+        """\
+        Initialize your data structure here.\
+        """\
+        self.data = \{\}\
+        \
+\
+    def put(self, key: int, value: int) -> None:\
+        """\
+        value will always be non-negative.\
+        """\
+        self.data[key] = value\
+        \
+\
+    def get(self, key: int) -> int:\
+        """\
+        Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key\
+        """\
+        if key in self.data:\
+            return self.data[key]\
+        return -1\
+        \
+\
+    def remove(self, key: int) -> None:\
+        """\
+        Removes the mapping of the specified value key if this map contains a mapping for the key\
+        """\
+        if key in self.data:\
+            del(self.data[key])\
+        \
+\
+\
+# Your MyHashMap object will be instantiated and called as such:\
+# obj = MyHashMap()\
+# obj.put(key,value)\
+# param_2 = obj.get(key)\
+# obj.remove(key)}

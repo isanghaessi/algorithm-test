@@ -1,0 +1,108 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u49828 \uc0\u53469 \uc0\u51012  \uc0\u51060 \uc0\u50857 \uc0\u54644  \uc0\u45796 \uc0\u51020  \uc0\u50672 \uc0\u49328 \uc0\u51012  \uc0\u51648 \uc0\u50896 \uc0\u54616 \uc0\u45716  \uc0\u53328 \uc0\u47484  \uc0\u44396 \uc0\u54788 \uc0\u54616 \uc0\u46972 .\
+\
+\uc0\u8226 \	void push(int x) Pushes element x to the back of the queue.\
+\uc0\u8226 \	int pop() Removes the element from the front of the queue and returns it.\
+\uc0\u8226 \	int peek() Returns the element at the front of the queue.\
+\uc0\u8226 \	boolean empty() Returns true if the queue is empty, false otherwise.\
+\
+1.\uc0\u47532 \uc0\u49828 \uc0\u53944 \
+class MyQueue:\
+\
+    def __init__(self):\
+        """\
+        Initialize your data structure here.\
+        """\
+        self.input = []\
+        self.output = []\
+\
+    def push(self, x: int) -> None:\
+        """\
+        Push element x to the back of queue.\
+        """\
+        self.input.append(x)\
+        \
+\
+    def pop(self) -> int:\
+        """\
+        Removes the element from in front of queue and returns that element.\
+        """\
+        self.peek()\
+        return self.output.pop()\
+        \
+\
+    def peek(self) -> int:\
+        """\
+        Get the front element.\
+        """\
+        if not self.output:\
+            while self.input:\
+                self.output.append(self.input.pop())\
+        return self.output[-1]\
+\
+    def empty(self) -> bool:\
+        """\
+        Returns whether the queue is empty.\
+        """\
+        return self.input == [] and self.output == []\
+\
+\
+# Your MyQueue object will be instantiated and called as such:\
+# obj = MyQueue()\
+# obj.push(x)\
+# param_2 = obj.pop()\
+# param_3 = obj.peek()\
+# param_4 = obj.empty()\
+\
+class MyQueue:\
+\
+    def __init__(self):\
+        """\
+        Initialize your data structure here.\
+        """\
+        self.s = []\
+\
+    def push(self, x: int) -> None:\
+        """\
+        Push element x to the back of queue.\
+        """\
+        len_s = len(self.s)\
+        temp = []\
+        for _ in range(len_s):\
+            temp.append(self.s.pop())\
+        self.s.append(x)\
+        for _ in range(len_s):\
+            self.s.append(temp.pop())\
+        \
+\
+    def pop(self) -> int:\
+        """\
+        Removes the element from in front of queue and returns that element.\
+        """\
+        return self.s.pop()\
+        \
+\
+    def peek(self) -> int:\
+        """\
+        Get the front element.\
+        """\
+        return self.s[-1]\
+\
+    def empty(self) -> bool:\
+        """\
+        Returns whether the queue is empty.\
+        """\
+        return len(self.s) == 0\
+\
+\
+# Your MyQueue object will be instantiated and called as such:\
+# obj = MyQueue()\
+# obj.push(x)\
+# param_2 = obj.pop()\
+# param_3 = obj.peek()\
+# param_4 = obj.empty()}
