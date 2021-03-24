@@ -1,0 +1,64 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{disc\}}{\leveltext \'01\'95}{\levelnumbers;}\fi-500\li0\lin0}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{circle\}}{\leveltext \'01\uc0\u9702 _;}{\levelnumbers;}\fi-500\li500\lin500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{diamond\}}{\leveltext \'01\uc0\u9656 _;}{\levelnumbers;}\fi-500\li1000\lin1000}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{disc\}}{\leveltext \'01\'95}{\levelnumbers;}\fi-500\li1500\lin1500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{circle\}}{\leveltext \'01\uc0\u9702 _;}{\levelnumbers;}\fi-500\li2000\lin2000}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{diamond\}}{\leveltext \'01\uc0\u9656 _;}{\levelnumbers;}\fi-500\li2500\lin2500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{disc\}}{\leveltext \'01\'95}{\levelnumbers;}\fi-500\li3000\lin3000}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{circle\}}{\leveltext \'01\uc0\u9702 _;}{\levelnumbers;}\fi-500\li3500\lin3500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{diamond\}}{\leveltext \'01\uc0\u9656 _;}{\levelnumbers;}\fi-500\li4000\lin4000}
+{\listname ;}\listid-248244114}
+}
+{\*\listoverridetable{\listoverride\listid-248244114\listoverridecount0\ls-248244114}}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u51060 \uc0\u51652  \uc0\u53944 \uc0\u47532 \uc0\u51032  \uc0\u52572 \uc0\u45824  \uc0\u44618 \uc0\u51060 \uc0\u47484  \uc0\u44396 \uc0\u54616 \uc0\u46972 .\
+\
+Input: root = [3,9,20,null,null,15,7]\
+Output: 3\
+\
+# Definition for a binary tree node.\
+# class TreeNode:\
+#     def __init__(self, val=0, left=None, right=None):\
+#         self.val = val\
+#         self.left = left\
+#         self.right = right\
+\
+1.\uc0\u48652 \uc0\u47336 \uc0\u53944 \uc0\u54252 \uc0\u49828 \
+class Solution:\
+    def maxDepth(self, root: TreeNode) -> int:\
+        def recur_tree(result, node, depth):\
+            if node == None:\
+                return\
+            recur_tree(result, node.left, depth + 1)\
+            recur_tree(result, node.right, depth + 1)\
+            result.add(depth)\
+        \
+        result = \{0\}\
+        recur_tree(result, root, 1)\
+        return max(result)\
+\
+2.bfs\
+class Solution:\
+    def maxDepth(self, root: TreeNode) -> int:\
+        result = 0\
+        if root == None:\
+            return 0\
+        q = collections.deque([root])\
+        while len(q) > 0:\
+            result += 1\
+            for _ in range(len(q)):\
+                node = q.popleft()\
+                if node.left != None:\
+                    q.append(node.left)\
+                if node.right != None:\
+                    q.append(node.right)\
+        return result\
+\
+\pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi-1000\li2000
+\ls-248244114\ilvl2{\listtext    \uc0\u9656    }\uc0\u53944 \uc0\u47532 \uc0\u51032  \uc0\u47112 \uc0\u48296  \uc0\u53456 \uc0\u49353 \uc0\u51008  bfs\uc0\u47484  \uc0\u51060 \uc0\u50857 \uc0\u54620 \uc0\u45796 .\
+\pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\
+}
