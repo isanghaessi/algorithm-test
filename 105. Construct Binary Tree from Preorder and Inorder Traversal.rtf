@@ -1,0 +1,28 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u53944 \uc0\u47532 \uc0\u51032  \uc0\u51204 \uc0\u50948 , \uc0\u51473 \uc0\u50948  \uc0\u49692 \uc0\u54924  \uc0\u44208 \uc0\u44284 \uc0\u47484  \uc0\u51077 \uc0\u47141 \uc0\u44050 \uc0\u51004 \uc0\u47196  \uc0\u48155 \uc0\u50500  \uc0\u51060 \uc0\u51652  \uc0\u53944 \uc0\u47532 \uc0\u47484  \uc0\u44396 \uc0\u52629 \uc0\u54616 \uc0\u46972 .\
+\
+Input: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]\
+Output: [3,9,20,null,null,15,7]\
+\
+# Definition for a binary tree node.\
+# class TreeNode:\
+#     def __init__(self, val=0, left=None, right=None):\
+#         self.val = val\
+#         self.left = left\
+#         self.right = right\
+\
+1.\uc0\u48516 \uc0\u54624  \uc0\u51221 \uc0\u48373 \
+class Solution:\
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:\
+        if inorder:\
+            index = inorder.index(preorder.pop(0))\
+            node = TreeNode(inorder[index])\
+            node.left = self.buildTree(preorder, inorder[:index])\
+            node.right = self.buildTree(preorder, inorder[index + 1:])\
+            return node\
+}

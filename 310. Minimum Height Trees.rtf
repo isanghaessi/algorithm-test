@@ -1,0 +1,38 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u45432 \uc0\u46300  \uc0\u44060 \uc0\u49688 \uc0\u50752  \uc0\u47924 \uc0\u48169 \uc0\u54693  \uc0\u44536 \uc0\u47000 \uc0\u54532 \uc0\u47484  \uc0\u51077 \uc0\u47141 \uc0\u48155 \uc0\u50500  \uc0\u53944 \uc0\u47532 \uc0\u44032  \uc0\u52572 \uc0\u49548  \uc0\u45458 \uc0\u51060 \uc0\u44032  \uc0\u46104 \uc0\u45716  \uc0\u47336 \uc0\u53944 \uc0\u51032  \uc0\u47785 \uc0\u47197 \uc0\u51012  \uc0\u47532 \uc0\u53556 \uc0\u54616 \uc0\u46972 .\
+\
+Input: n = 4, edges = [[1,0],[1,2],[1,3]]\
+Output: [1]\
+\
+1.\uc0\u47532 \uc0\u54532  \uc0\u45432 \uc0\u46300  \uc0\u51228 \uc0\u44144 \
+import collections\
+\
+class Solution:\
+    def findMinHeightTrees(self, n: int, edges: List[List[int]]) -> List[int]:\
+        if n <= 1:\
+            return [0]\
+        graph = collections.defaultdict(list)\
+        for i, j in edges:\
+            graph[i].append(j)\
+            graph[j].append(i)\
+        leaves=[]\
+        for i in range(n):\
+            if len(graph[i]) == 1:\
+                leaves.append(i)\
+        while n > 2:\
+            n -= len(leaves)\
+            new_leaves = []\
+            for leaf in leaves:\
+                neighbor = graph[leaf].pop()\
+                graph[neighbor].remove(leaf)\
+                if len(graph[neighbor]) == 1:\
+                    new_leaves.append(neighbor)\
+            leaves = new_leaves\
+        return leaves\
+\
+}

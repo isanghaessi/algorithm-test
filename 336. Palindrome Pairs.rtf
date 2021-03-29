@@ -1,0 +1,95 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{disc\}}{\leveltext \'01\'95}{\levelnumbers;}\fi-500\li0\lin0}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{circle\}}{\leveltext \'01\uc0\u9702 _;}{\levelnumbers;}\fi-500\li500\lin500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{diamond\}}{\leveltext \'01\uc0\u9656 _;}{\levelnumbers;}\fi-500\li1000\lin1000}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{disc\}}{\leveltext \'01\'95}{\levelnumbers;}\fi-500\li1500\lin1500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{circle\}}{\leveltext \'01\uc0\u9702 _;}{\levelnumbers;}\fi-500\li2000\lin2000}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{diamond\}}{\leveltext \'01\uc0\u9656 _;}{\levelnumbers;}\fi-500\li2500\lin2500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{disc\}}{\leveltext \'01\'95}{\levelnumbers;}\fi-500\li3000\lin3000}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{circle\}}{\leveltext \'01\uc0\u9702 _;}{\levelnumbers;}\fi-500\li3500\lin3500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{diamond\}}{\leveltext \'01\uc0\u9656 _;}{\levelnumbers;}\fi-500\li4000\lin4000}
+{\listname ;}\listid-902063978}
+}
+{\*\listoverridetable{\listoverride\listid-902063978\listoverridecount0\ls-902063978}}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u45800 \uc0\u50612  \uc0\u47532 \uc0\u49828 \uc0\u53944 \uc0\u50640 \uc0\u49436  words[i] + words[j]\uc0\u44032  \uc0\u54064 \uc0\u47536 \uc0\u46300 \uc0\u47212 \uc0\u51060  \uc0\u46104 \uc0\u45716  \uc0\u47784 \uc0\u46304  \uc0\u51064 \uc0\u45937 \uc0\u49828  \uc0\u51312 \uc0\u54633  (i, j)\uc0\u47484  \uc0\u44396 \uc0\u54616 \uc0\u46972 .\
+\
+Input: words = ["abcd","dcba","lls","s","sssll"]\
+Output: [[0,1],[1,0],[3,2],[2,4]]\
+\
+1.\uc0\u48652 \uc0\u47336 \uc0\u53944 \uc0\u54252 \uc0\u49828 \
+class Solution:\
+    def palindromePairs(self, words: List[str]) -> List[List[int]]:\
+        def isPalindrome(word):\
+            return word == word[::-1]\
+        \
+        result = []\
+        for i, word1 in enumerate(words):\
+            for j, word2 in enumerate(words):\
+                if i!= j and isPalindrome(word1 + word2):\
+                    result.append((i, j))\
+        return result\
+\
+\pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi-1000\li2000
+\ls-902063978\ilvl2{\listtext    \uc0\u9656    }\uc0\u49884 \uc0\u44036  \uc0\u52488 \uc0\u44284 \
+\pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\
+2.Trie \uc0\u54876 \uc0\u50857 \
+import collections\
+from typing import List\
+\
+\
+class TrieNode:\
+    def __init__(self):\
+        self.children = collections.defaultdict(TrieNode)\
+        self.word_id = -1\
+        self.palindrome_word_ids = []\
+\
+\
+class Trie:\
+    def __init__(self):\
+        self.root = TrieNode()\
+\
+    @staticmethod\
+    def is_palindrome(word: str) -> bool:\
+        return word[::] == word[::-1]\
+\
+    def insert(self, index, word) -> None:\
+        node = self.root\
+        for i, char in enumerate(reversed(word)):\
+            if self.is_palindrome(word[0:len(word) - i]):\
+                node.palindrome_word_ids.append(index)\
+            node = node.children[char]\
+        node.word_id = index\
+\
+    def search(self, index, word) -> List[List[int]]:\
+        result = []\
+        node = self.root\
+        while word:\
+            if node.word_id >= 0:\
+                if self.is_palindrome(word):\
+                    result.append([index, node.word_id])\
+            if not word[0] in node.children:\
+                return result\
+            node = node.children[word[0]]\
+            word = word[1:]\
+        if node.word_id >= 0 and node.word_id != index:\
+            result.append([index, node.word_id])\
+        for palindrome_word_id in node.palindrome_word_ids:\
+            result.append([index, palindrome_word_id])\
+        return result\
+\
+\
+class Solution:\
+    def palindromePairs(self, words: List[str]) -> List[List[int]]:\
+        trie = Trie()\
+        for i, word in enumerate(words):\
+            trie.insert(i, word)\
+        results = []\
+        for i, word in enumerate(words):\
+            results.extend(trie.search(i, word))\
+        return results\
+\
+}
