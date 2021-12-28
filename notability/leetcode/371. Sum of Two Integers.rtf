@@ -1,0 +1,47 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u46160  \uc0\u51221 \uc0\u49688  a\uc0\u50752  b\uc0\u51032  \uc0\u54633 \uc0\u51012  \uc0\u44396 \uc0\u54616 \uc0\u46972 . +\uc0\u46608 \uc0\u45716  -\uc0\u50672 \uc0\u49328 \uc0\u51088 \uc0\u45716  \uc0\u49324 \uc0\u50857 \uc0\u54624  \uc0\u49688  \uc0\u50630 \uc0\u45796 .\
+\
+Input: a = 1, b = 2\
+Output: 3\
+\
+1.\uc0\u51204 \uc0\u44032 \uc0\u49328 \uc0\u44592 \
+class Solution:\
+    def getSum(self, a: int, b: int) -> int:\
+        MASK = 0xffffffff\
+        INT_MAX = 0x7fffffff\
+        a_bin = bin(a & MASK)[2:].zfill(32)\
+        b_bin = bin(b & MASK)[2:].zfill(32)\
+        result = []\
+        carry = 0\
+        sum = 0\
+        for i in range(32):\
+            A = int(a_bin[31 - i])\
+            B = int(b_bin[31 - i])\
+            Q1 = A & B\
+            Q2 = A ^ B\
+            Q3 = Q2 & carry\
+            sum = carry ^ Q2\
+            carry = Q1 | Q3\
+            result.append(str(sum))\
+        if carry == 1:\
+            result.append('1')\
+        result = int(''.join(result[::-1]), 2) & MASK\
+        if result > INT_MAX:\
+            result = ~(result ^ MASK)\
+        return result\
+            \
+2.\uc0\u48708 \uc0\u53944  \uc0\u50672 \uc0\u49328 \
+class Solution:\
+    def getSum(self, a: int, b: int) -> int:\
+        MASK = 0xffffffff\
+        INT_MAX = 0x7fffffff\
+        while b != 0:\
+            a, b = (a ^ b) & MASK, ((a & b) << 1) & MASK\
+        if a > INT_MAX:\
+            a = ~(a ^ MASK)\
+        return a}

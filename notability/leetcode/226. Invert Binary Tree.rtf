@@ -1,0 +1,126 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u51473 \uc0\u50521 \uc0\u51012  \uc0\u44592 \uc0\u51456 \uc0\u51004 \uc0\u47196  \uc0\u51060 \uc0\u51652  \uc0\u53944 \uc0\u47532 \uc0\u47484  \uc0\u48152 \uc0\u51204 \uc0\u49884 \uc0\u53020 \uc0\u46972 .\
+\
+Input: root = [4,2,7,1,3,6,9]\
+Output: [4,7,2,9,6,3,1]\
+\
+# Definition for a binary tree node.\
+# class TreeNode:\
+#     def __init__(self, val=0, left=None, right=None):\
+#         self.val = val\
+#         self.left = left\
+#         self.right = right\
+\
+1.dfs\
+import collections\
+\
+class Solution:\
+    def invertTree(self, root: TreeNode) -> TreeNode:\
+        def dfs(node):\
+            if node == None:\
+                return\
+            dfs(node.left)\
+            dfs(node.right)\
+            node.left, node.right = node.right, node.left\
+        \
+        dfs(root)\
+        return root\
+\
+class Solution:\
+    def invertTree(self, root: TreeNode) -> TreeNode:\
+        stack = collections.deque([root])\
+        while stack:\
+            node = stack.pop()\
+            if node:\
+                node.left, node.right = node.right, node.left\
+                stack.append(node.left)\
+                stack.append(node.right)\
+        return root\
+\
+class Solution:\
+    def invertTree(self, root: TreeNode) -> TreeNode:\
+        stack = collections.deque([root])\
+        while stack:\
+            node = stack.pop()\
+            if node:\
+                stack.append(node.left)\
+                stack.append(node.right)\
+                node.left, node.right = node.right, node.left\
+        return root\
+\
+2.bfs\
+class Solution:\
+    def invertTree(self, root: TreeNode) -> TreeNode:\
+        q = collections.deque([root])\
+        while q:\
+            node = q.popleft()\
+            if node:\
+                node.left, node.right = node.right, node.left\
+                q.append(node.left)\
+                q.append(node.right)\
+        return root\
+\
+class Solution:\
+    def invertTree(self, root: TreeNode) -> TreeNode:\
+        q = collections.deque([root])\
+        while q:\
+            node = q.popleft()\
+            if node:\
+                q.append(node.left)\
+                q.append(node.right)\
+                node.left, node.right = node.right, node.left\
+        return root\
+\
+3.\uc0\u54028 \uc0\u51060 \uc0\u50028  \uc0\u45796 \uc0\u50868 \
+class Solution:\
+    def invertTree(self, root: TreeNode) -> TreeNode:\
+        if root:\
+            root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)\
+            return root\
+        return None\
+\
+# Definition for a binary tree node.\
+# class TreeNode:\
+#     def __init__(self, val=0, left=None, right=None):\
+#         self.val = val\
+#         self.left = left\
+#         self.right = right\
+class Solution:\
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:\
+        def pre_order_filter(root):\
+            if not root or root.val == float('inf'):\
+                \
+                return None\
+            root.left = pre_order_filter(root.left)\
+            root.right = pre_order_filter(root.right)\
+            \
+            return root\
+        \
+        \
+        if not root:\
+            \
+            return root\
+        q = []\
+        q.append(root)\
+        num_of_nodes = 1\
+        while len(list(filter(lambda a: a.val != float('inf'), q))) > 0:\
+            for i in range(len(q) // 2):\
+                q[i].val, q[-(i + 1)].val = q[-(i + 1)].val, q[i].val\
+            new_q = []\
+            while len(q) > 0:\
+                current_node = q.pop()\
+                if not current_node.left:\
+                    current_node.left = TreeNode(float('inf'))\
+                if not current_node.right:\
+                    current_node.right = TreeNode(float('inf'))\
+                new_q.append(current_node.left)\
+                new_q.append(current_node.right)\
+            q = new_q\
+        root = pre_order_filter(root)\
+        \
+        return root}

@@ -1,0 +1,51 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u49707 \uc0\u51088 \uc0\u50752  \uc0\u50672 \uc0\u49328 \uc0\u51088 \uc0\u47484  \uc0\u51077 \uc0\u47141 \uc0\u48155 \uc0\u50500  \uc0\u44032 \uc0\u45733 \uc0\u54620  \uc0\u47784 \uc0\u46304  \uc0\u51312 \uc0\u54633 \uc0\u51032  \uc0\u44208 \uc0\u44284 \uc0\u47484  \uc0\u52636 \uc0\u47141 \uc0\u54616 \uc0\u46972 .\
+\
+Input: expression = "2-1-1"\
+Output: [0,2]\
+Explanation:\
+((2-1)-1) = 0 \
+(2-(1-1)) = 2\
+\
+1.\uc0\u48516 \uc0\u54624  \uc0\u51221 \uc0\u48373 \
+class Solution:\
+    def diffWaysToCompute(self, expression: str) -> List[int]:\
+        def compute(left, right, op):\
+            results = []\
+            for l in left:\
+                for r in right:\
+                    results.append(eval(str(l) + op + str(r)))\
+            return results\
+        \
+        if expression.isdigit():\
+            return [int(expression)]\
+        results = []\
+        for index, value in enumerate(expression):\
+            if value in '-+*':\
+                left = self.diffWaysToCompute(expression[:index])\
+                right = self.diffWaysToCompute(expression[index + 1:])\
+                results.extend(compute(left, right, value))\
+        return results\\
+\
+class Solution:\
+    def diffWaysToCompute(self, expression: str) -> List[int]:\
+        if not any(map(lambda a: a in expression, '+-*')):\
+        \
+            return [expression]\
+        answer = []\
+        i = 0\
+        while i < len(expression):\
+            if expression[i] in '+-*':\
+                left = self.diffWaysToCompute(expression[:i])\
+                right = self.diffWaysToCompute(expression[i + 1:])\
+                for l in left:\
+                    for r in right:\
+                        answer.append(str(eval(l + expression[i] + r)))\
+            i += 1\
+            \
+        return answer}

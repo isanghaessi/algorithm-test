@@ -1,0 +1,74 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u53945 \uc0\u51221  \uc0\u54588 \uc0\u48279 \uc0\u51012  \uc0\u44592 \uc0\u51456 \uc0\u51004 \uc0\u47196  \uc0\u54924 \uc0\u51204 \uc0\u54616 \uc0\u50668  \uc0\u51221 \uc0\u47148 \uc0\u46108  \uc0\u48176 \uc0\u50676 \uc0\u50640 \uc0\u49436  target\uc0\u44050 \uc0\u51032  \uc0\u51064 \uc0\u45937 \uc0\u49828 \uc0\u47484  \uc0\u52636 \uc0\u47141 \uc0\u54616 \uc0\u46972 .\
+\
+Input: nums = [4,5,6,7,0,1,2], target = 0\
+Output: 4\
+\
+1.\uc0\u51060 \uc0\u51652 \uc0\u44160 \uc0\u49353 \
+class Solution:\
+    def search(self, nums: List[int], target: int) -> int:\
+        if not nums:\
+            return -1\
+        left, right = 0, len(nums) - 1\
+        while left < right:\
+            mid = left + (right - left) // 2\
+            if nums[mid] > nums[right]:\
+                left = mid + 1\
+            else:\
+                right = mid\
+        pivot = left\
+        left, right = 0, len(nums) - 1\
+        while left <= right:\
+            mid = left + (right - left) // 2\
+            mid_pivot = (mid + pivot) % len(nums)\
+            if nums[mid_pivot] < target:\
+                left = mid + 1\
+            elif nums[mid_pivot] > target:\
+                right = mid - 1\
+            else:\
+                return mid_pivot\
+        return -1\
+\
+class Solution:\
+    def search(self, nums: List[int], target: int) -> int:\
+        if not nums:\
+            return -1\
+        left, right = 0, len(nums) - 1\
+        while left < right:\
+            mid = left + (right - left) // 2\
+            if nums[mid] > nums[right]:\
+                left = mid + 1\
+            else:\
+                right = mid\
+        pivot = left\
+        nums = nums[pivot:] + nums[:pivot]\
+        left, right = 0, len(nums) - 1\
+        while left <= right:\
+            mid = left + (right - left) // 2\
+            if nums[mid] < target:\
+                left = mid + 1\
+            elif nums[mid] > target:\
+                right = mid - 1\
+            else:\
+                return (mid + pivot) % len(nums)\
+        return -1\
+\
+        return -1\
+\
+2.\uc0\u54028 \uc0\u51060 \uc0\u50028 \uc0\u45796 \uc0\u50880 \
+class Solution:\
+    def search(self, nums: List[int], target: int) -> int:\
+        if target not in nums:\
+            return -1\
+        return nums.index(target)\
+\
+\
+\
+\
+\
+}

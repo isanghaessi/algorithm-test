@@ -1,0 +1,74 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u51077 \uc0\u47141 \uc0\u44050 \uc0\u51060  UTF-8 \uc0\u47928 \uc0\u51088 \uc0\u50676 \uc0\u51060  \uc0\u47582 \uc0\u45716 \uc0\u51648  \uc0\u44160 \uc0\u51613 \uc0\u54616 \uc0\u46972 .\
+\
+Input: data = [197,130,1]\
+Output: true\
+Explanation: data represents the octet sequence: 11000101 10000010 00000001.\
+It is a valid utf-8 encoding for a 2-bytes character followed by a 1-byte character.\
+\
+1.\uc0\u48708 \uc0\u53944  \uc0\u50672 \uc0\u49328 \
+class Solution:\
+    def validUtf8(self, data: List[int]) -> bool:\
+        def check(size):\
+            for i in range(start + 1, start + size + 1):\
+                if i >= len(data) or (data[i] >> 6) != 0b10:\
+                    return False\
+            return True\
+        \
+        \
+        start = 0\
+        while start < len(data):\
+            first = data[start]\
+            if (first >> 3) == 0b11110 and check(3):\
+                start += 4\
+            elif (first >> 4) == 0b1110 and check(2):\
+                start += 3\
+            elif (first >> 5) == 0b110 and check(1):\
+                start += 2\
+            elif (first >> 7) == 0:\
+                start += 1\
+            else:\
+                return False\
+        return True\
+\
+class Solution:\
+    def validUtf8(self, data: List[int]) -> bool:\
+        def check(data, count):\
+            if count > 4 or len(data) != count:\
+                \
+                return False\
+            if count == 1:\
+\
+                return data[0][0] == '0'\
+            else:\
+                first = ('1' * count) + '0'\
+                rest = '10'\
+                for i, d in enumerate(data):\
+                    if i == 0 and d[0:count + 1] != first:\
+\
+                        return False\
+                    if i > 0 and d[0:2] != rest:\
+\
+                        return False\
+\
+                return True\
+        \
+        \
+        data = list(map(lambda a: bin(a)[2:].rjust(8, '0'), data))\
+        i = 0\
+        while i < len(data):\
+            current = data[i]\
+            j = 0\
+            while j < 8 and current[j] == '1':\
+                j += 1\
+            if not check(data[i:i + (j if j > 0 else 1)], j if j > 0 else 1):\
+                \
+                return False\
+            i += j if j > 0 else 1\
+            \
+        return True}

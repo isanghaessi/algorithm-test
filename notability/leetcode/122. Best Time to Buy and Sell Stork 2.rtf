@@ -1,0 +1,43 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u50668 \uc0\u47084  \uc0\u48264 \uc0\u51032  \uc0\u44144 \uc0\u47000 \uc0\u47196  \uc0\u45244  \uc0\u49688  \uc0\u51080 \uc0\u45716  \uc0\u52572 \uc0\u45824  \uc0\u51060 \uc0\u51061 \uc0\u51012  \uc0\u49328 \uc0\u52636 \uc0\u54616 \uc0\u46972 .\
+\
+Input: prices = [7,1,5,3,6,4]\
+Output: 7\
+Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.\
+Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.\
+\
+1.\uc0\u44536 \uc0\u47532 \uc0\u46356 \
+class Solution:\
+    def maxProfit(self, prices: List[int]) -> int:\
+        result = 0\
+        for i in range(len(prices) - 1):\
+            if prices[i] < prices[i + 1]:\
+                result += prices[i + 1] - prices[i]\
+        return result\
+\
+class Solution:\
+    def maxProfit(self, prices: List[int]) -> int:\
+        return sum([max(prices[i + 1] - prices[i], 0) for i in range(len(prices) - 1)])\
+\
+class Solution:\
+    def maxProfit(self, prices: List[int]) -> int:\
+        return sum([prices[i + 1] - prices[i] for i in range(len(prices) - 1) if prices[i + 1] - prices[i] > 0])\
+\
+class Solution:\
+    def maxProfit(self, prices: List[int]) -> int:\
+        answer = 0\
+        i = 0\
+        left = prices[i]\
+        while i + 1 < len(prices):\
+            if prices[i] > prices[i + 1]:\
+                answer += prices[i] - left\
+                left = prices[i + 1]\
+            i += 1\
+        answer += prices[i] - left\
+            \
+        return answer}

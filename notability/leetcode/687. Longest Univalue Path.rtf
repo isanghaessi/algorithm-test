@@ -1,0 +1,129 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u46041 \uc0\u51068 \uc0\u54620  \uc0\u44050 \uc0\u51012  \uc0\u51648 \uc0\u45772  \uc0\u44032 \uc0\u51109  \uc0\u44596  \uc0\u44221 \uc0\u47196 \uc0\u47484  \uc0\u52286 \uc0\u50500 \uc0\u46972 .\
+\
+Input: root = [5,4,5,1,1,5]\
+Output: 2\
+\
+# Definition for a binary tree node.\
+# class TreeNode:\
+#     def __init__(self, val=0, left=None, right=None):\
+#         self.val = val\
+#         self.left = left\
+#         self.right = right\
+\
+1.dfs\
+class Solution:\
+    result = 0\
+    \
+    def longestUnivaluePath(self, root: TreeNode) -> int:\
+        def dfs(node, val, count):\
+            if node == None or node.val != val:\
+                return count - 1\
+            return max(dfs(node.left, val, count + 1), dfs(node.right, val, count + 1))\
+            \
+        def findUniPath(node):\
+            if node == None:\
+                return\
+            left = dfs(node.left, node.val, 1)\
+            right = dfs(node.right, node.val, 1)\
+            if self.result < left + right:\
+                self.result = left + right\
+            findUniPath(node.left)\
+            findUniPath(node.right)\
+            \
+        findUniPath(root)\
+        return self.result\
+\
+\
+class Solution:\
+    result = 0\
+    \
+    def longestUnivaluePath(self, root: TreeNode) -> int:\
+        def dfs(node):\
+            if node == None:\
+                return 0\
+            left = dfs(node.left)\
+            right = dfs(node.right)\
+            if node.left and node.left.val == node.val:\
+                left += 1\
+            else:\
+                left = 0\
+            if node.right and node.right.val == node.val:\
+                right += 1\
+            else:\
+                right = 0\
+            self.result = max(self.result, left + right)\
+            return max(left, right)\
+        \
+        dfs(root)\
+        return self.result\
+\
+class Solution:\
+    result = 0\
+    \
+    def longestUnivaluePath(self, root: TreeNode) -> int:\
+        def dfsLongest(node, length):\
+            if node == None:\
+                \
+                return None, length\
+            left_v, left_l = dfsLongest(node.left, length)\
+            right_v, right_l = dfsLongest(node.right, length)\
+            if left_v == right_v == node.val:\
+                length = max(left_l, right_l) + 1\
+                self.result = max(self.result, left_l + right_l + 2)\
+            elif left_v == node.val:\
+                length = left_l + 1\
+            elif right_v == node.val:\
+                length = right_l + 1\
+            else:\
+                length = 0\
+            self.result = max(self.result, length)\
+                \
+            return node.val, length\
+            \
+            \
+        dfsLongest(root, 0)\
+        \
+        return self.result\
+\
+# Definition for a binary tree node.\
+# class TreeNode:\
+#     def __init__(self, val=0, left=None, right=None):\
+#         self.val = val\
+#         self.left = left\
+#         self.right = right\
+class Solution:\
+    def longestUnivaluePath(self, root: Optional[TreeNode]) -> int:\
+        def dfs(node):\
+            nonlocal answer\
+            \
+            if not node:\
+                \
+                return None, 0\
+            left_val, left_count = dfs(node.left)\
+            right_val, right_count = dfs(node.right)\
+            answer_count = 1\
+            return_count = 1\
+            if left_val == node.val:\
+                answer_count += left_count\
+                return_count += left_count\
+            if right_val == node.val:\
+                answer_count += right_count\
+                return_count = max(return_count, right_count + 1)\
+            answer = max(answer, answer_count - 1)\
+            \
+            return node.val, return_count\
+        \
+        if not root:\
+            \
+            return 0\
+        answer = 0\
+        dfs(root)\
+        \
+        return answer\
+}

@@ -1,0 +1,97 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u51221 \uc0\u47148 \uc0\u46108  \uc0\u48176 \uc0\u50676 \uc0\u51012  \uc0\u48155 \uc0\u50500  \uc0\u45927 \uc0\u49480 \uc0\u54616 \uc0\u50668  \uc0\u53440 \uc0\u44191 \uc0\u51012  \uc0\u47564 \uc0\u46308  \uc0\u49688  \uc0\u51080 \uc0\u45716  \uc0\u48176 \uc0\u50676 \uc0\u51032  \uc0\u46160  \uc0\u49707 \uc0\u51088  \uc0\u51064 \uc0\u45937 \uc0\u49828 \uc0\u47484  \uc0\u47532 \uc0\u53556 \uc0\u54616 \uc0\u46972 .\
+#\uc0\u51452 \uc0\u51032 : \uc0\u51060  \uc0\u47928 \uc0\u51228 \uc0\u50640 \uc0\u49436  \uc0\u48176 \uc0\u50676 \uc0\u51008  0\uc0\u51060  \uc0\u50500 \uc0\u45772  1\uc0\u48512 \uc0\u53552  \uc0\u49884 \uc0\u51089 \uc0\u54616 \uc0\u45716  \uc0\u44163 \uc0\u51004 \uc0\u47196  \uc0\u54620 \uc0\u45796 .\
+\
+Input: numbers = [2,7,11,15], target = 9\
+Output: [1,2]\
+Explanation: The sum of 2 and 7 is 9. Therefore index1 = 1, index2 = 2.\
+\
+1.\uc0\u53804  \uc0\u54252 \uc0\u51064 \uc0\u53552 \
+class Solution:\
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:\
+        left, right = 0, len(numbers) - 1\
+        while not left == right:\
+            temp = numbers[left] + numbers[right]\
+            if temp < target:\
+                left += 1\
+            elif temp > target:\
+                right -= 1\
+            else:\
+                return [left + 1, right + 1]\
+\
+import bisect\
+\
+class Solution:\
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:\
+        for k, v in enumerate(numbers):\
+            left, right = k + 1, len(numbers) - 1\
+            expected = target - v\
+            i = bisect.bisect_left(numbers[k + 1:], expected)\
+            if i < len(numbers[k + 1:]) and numbers[k + i + 1] == expected:\
+                return k + 1, k + i + 2\
+\
+import bisect\
+\
+class Solution:\
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:\
+        for k, v in enumerate(numbers):\
+            left, right = k + 1, len(numbers) - 1\
+            expected = target - v\
+            nums = numbers[k + 1:]\
+            i = bisect.bisect_left(nums, expected)\
+            if i < len(nums) and numbers[k + i + 1] == expected:\
+                return k + 1, k + i + 2\
+\
+import bisect\
+\
+class Solution:\
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:\
+        for k, v in enumerate(numbers):\
+            left, right = k + 1, len(numbers) - 1\
+            expected = target - v\
+            i = bisect.bisect_left(numbers, expected, k + 1)\
+            if i < len(numbers) and numbers[i] == expected:\
+                return k + 1, i + 1\
+\
+2. \uc0\u51060 \uc0\u51652  \uc0\u44160 \uc0\u49353 \
+class Solution:\
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:\
+        for k, v in enumerate(numbers):\
+            left, right = k + 1, len(numbers) - 1\
+            expected = target - v\
+            while left <= right:\
+                mid = left + (right - left) // 2\
+                if numbers[mid] < expected:\
+                    left = mid + 1\
+                elif numbers[mid] > expected:\
+                    right = mid - 1\
+                else:\
+                    return k + 1, mid + 1\
+\
+import bisect\
+\
+class Solution:\
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:\
+        for i in range(len(numbers)):\
+            right_numbers = numbers[i + 1:]\
+            found = bisect.bisect_left(right_numbers, target - numbers[i])\
+            if 0 <= found and found < len(right_numbers) \\\
+                and right_numbers[found] == target - numbers[i]:\
+                \
+                return [i + 1, i + found + 2]\
+\
+import bisect\
+\
+class Solution:\
+    def twoSum(self, numbers: List[int], target: int) -> List[int]:\
+        for i in range(len(numbers)):\
+            found = bisect.bisect_left(numbers, target - numbers[i], i + 1)\
+            if found < len(numbers) and numbers[found] == target - numbers[i]:\
+                \
+                return [i + 1, found + 1]\
+}

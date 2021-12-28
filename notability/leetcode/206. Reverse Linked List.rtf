@@ -1,0 +1,66 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{disc\}}{\leveltext \'01\'95}{\levelnumbers;}\fi-500\li0\lin0}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{circle\}}{\leveltext \'01\uc0\u9702 _;}{\levelnumbers;}\fi-500\li500\lin500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{diamond\}}{\leveltext \'01\uc0\u9656 _;}{\levelnumbers;}\fi-500\li1000\lin1000}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{disc\}}{\leveltext \'01\'95}{\levelnumbers;}\fi-500\li1500\lin1500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{circle\}}{\leveltext \'01\uc0\u9702 _;}{\levelnumbers;}\fi-500\li2000\lin2000}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{diamond\}}{\leveltext \'01\uc0\u9656 _;}{\levelnumbers;}\fi-500\li2500\lin2500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{disc\}}{\leveltext \'01\'95}{\levelnumbers;}\fi-500\li3000\lin3000}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{circle\}}{\leveltext \'01\uc0\u9702 _;}{\levelnumbers;}\fi-500\li3500\lin3500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{diamond\}}{\leveltext \'01\uc0\u9656 _;}{\levelnumbers;}\fi-500\li4000\lin4000}
+{\listname ;}\listid-2044522743}
+}
+{\*\listoverridetable{\listoverride\listid-2044522743\listoverridecount0\ls-2044522743}}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u50672 \uc0\u44208  \uc0\u47532 \uc0\u49828 \uc0\u53944 \uc0\u47484  \uc0\u46244 \uc0\u51665 \uc0\u50612 \uc0\u46972 .\
+\
+Input: head = [1,2,3,4,5]\
+Output: [5,4,3,2,1]\
+\
+# Definition for singly-linked list.\
+# class ListNode:\
+#     def __init__(self, val=0, next=None):\
+#         self.val = val\
+#         self.next = next\
+\
+1.\uc0\u48652 \uc0\u47336 \uc0\u53944  \uc0\u54252 \uc0\u49828 \
+class Solution:\
+    def reverseList(self, head: ListNode) -> ListNode:\
+        result = None\
+        while head:\
+            result = ListNode(val = head.val, next = result)\
+            head = head.next\
+        return result\
+\
+\pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi-1000\li2000
+\ls-2044522743\ilvl2{\listtext    \uc0\u9656    }\uc0\u49352 \uc0\u47196 \uc0\u50868  \uc0\u54756 \uc0\u46300 \uc0\u47484  \uc0\u47564 \uc0\u46308 \uc0\u50612 \uc0\u49436  \uc0\u44144 \uc0\u44984 \uc0\u47196  \uc0\u48537 \uc0\u50668  \uc0\u45208 \uc0\u44036 \uc0\u45796 .\
+\pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\
+2.\uc0\u51116 \uc0\u44480  \uc0\u54840 \uc0\u52636 \
+class Solution:\
+    def reverseList(self, head: ListNode) -> ListNode:\
+        def reverse(node: ListNode, prev: ListNode = None) -> ListNode:\
+            if not node:\
+                return prev\
+            next, node.next = node.next, prev\
+            return reverse(next, node)\
+        return reverse(head)\
+\
+3.\uc0\u48152 \uc0\u48373  \uc0\u54840 \uc0\u52636 \
+class Solution:\
+    def reverseList(self, head: ListNode) -> ListNode:\
+        node, prev = head, None\
+        while node:\
+            next, node.next = node.next, prev\
+            prev, node = node, next\
+        return prev\
+\
+class Solution:\
+    def reverseList(self, head: ListNode) -> ListNode:\
+        p, q, r = None, head, head\
+        while r != None:\
+            r, q.next, p = r.next, p, q\
+            q = r\
+        return p}

@@ -1,0 +1,158 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+0\uc0\u51012  \uc0\u50756 \uc0\u47308 \uc0\u54616 \uc0\u44592  \uc0\u50948 \uc0\u54644 \uc0\u49436 \uc0\u45716  1\uc0\u51012  \uc0\u45149 \uc0\u45236 \uc0\u50556  \uc0\u54620 \uc0\u45796 \uc0\u45716  \uc0\u44163 \uc0\u51012  [0, 1] \uc0\u49933 \uc0\u51004 \uc0\u47196  \uc0\u54364 \uc0\u54788 \uc0\u54616 \uc0\u45716  n\uc0\u44060 \uc0\u51032  \uc0\u53076 \uc0\u49828 \uc0\u44032  \uc0\u51080 \uc0\u45796 . \uc0\u53076 \uc0\u49828  \uc0\u44060 \uc0\u49688  n\uc0\u44284  \uc0\u51060  \uc0\u49933 \uc0\u46308 \uc0\u51012  \uc0\u51077 \uc0\u47141 \uc0\u51004 \uc0\u47196  \uc0\u48155 \uc0\u50520 \uc0\u51012  \uc0\u46412  \uc0\u47784 \uc0\u46304  \uc0\u53076 \uc0\u49828 \uc0\u44032  \uc0\u50756 \uc0\u47308  \uc0\u44032 \uc0\u45733 \uc0\u54620 \uc0\u51648  \uc0\u54032 \uc0\u48324 \uc0\u54616 \uc0\u46972 .\
+\
+Input: numCourses = 2, prerequisites = [[1,0]]\
+Output: true\
+\
+1.dfs\
+import collections\
+\
+class Solution:\
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:\
+        def dfs(c, p):\
+            if finish[c] == True:\
+                return True\
+            if c in p[:-1]:\
+                return False\
+            for pr in pre[c]:\
+                if dfs(pr, (p + [pr])[:]) == False:\
+                    return False\
+            return True\
+        \
+        pre = collections.defaultdict(list)\
+        for c, p in prerequisites:\
+            pre[c].append(p)\
+        finish = [False if c in pre else True for c in range(numCourses)]\
+        for i in range(len(finish)):\
+            finish[i] = dfs(i, [i])\
+            if finish[i] == False:\
+                return False\
+        return True\
+\
+import collections\
+\
+class Solution:\
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:\
+        def dfs(i):\
+            if i in traced:\
+                return False\
+            if i in visited:\
+                return True\
+            traced.add(i)\
+            for y in graph[i]:\
+                if not dfs(y):\
+                    return False\
+            traced.remove(i)\
+            visited.add(i)\
+            return True\
+        \
+        graph = collections.defaultdict(list)\
+        for x, y in prerequisites:\
+            graph[x].append(y)\
+        traced = set()\
+        visited = set()\
+        for x in list(graph):\
+            if not dfs(x):\
+                return False\
+        return True\
+\
+import collections\
+\
+class Solution:\
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:\
+        def dfs(course):\
+            if course in checked:\
+                \
+                return checked[course]\
+            if visited[course]:\
+                \
+                return False\
+            visited[course] = True\
+            for p in pre[course]:\
+                if not dfs(p):\
+                    \
+                    checked[course] = False\
+                    return False\
+            visited[course] = False\
+            \
+            checked[course] = True\
+            return True\
+            \
+                \
+        pre = collections.defaultdict(list)\
+        visited = collections.defaultdict(bool)\
+        checked = \{\}\
+        for c, p in prerequisites:\
+            pre[c].append(p)\
+            visited[c] = False\
+        for p in list(pre):\
+            if not dfs(p):\
+                \
+                return False\
+            \
+        return True\
+        \
+import collections\
+import copy\
+\
+class Solution:\
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:\
+        def dfs(courses):\
+            nonlocal answer\
+            nonlocal prerequisites_dict\
+            \
+            if not answer:\
+                    \
+                return\
+            for pre in prerequisites_dict[courses[-1]]:\
+                if pre in courses:\
+                    answer = False\
+                    \
+                    return\
+                prerequisites_dict[courses[-1]].remove(pre)\
+                dfs([*courses, pre])\
+        \
+        \
+        answer = True\
+        prerequisites_dict = collections.defaultdict(list)\
+        for course, pre in prerequisites:\
+            prerequisites_dict[course].append(pre)\
+        for course in copy.deepcopy(prerequisites_dict).keys():\
+            dfs([course])\
+        \
+        return answer\
+\
+import collections\
+\
+class Solution:\
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:\
+        def dfs(courses):\
+            nonlocal answer\
+            nonlocal prerequisites_dict\
+            \
+            if not answer:\
+                    \
+                return\
+            for pre in prerequisites_dict[courses[-1]]:\
+                if pre in courses:\
+                    answer = False\
+                    \
+                    return\
+                prerequisites_dict[courses[-1]].remove(pre)\
+                dfs([*courses, pre])\
+        \
+        \
+        answer = True\
+        prerequisites_dict = collections.defaultdict(list)\
+        for course, pre in prerequisites:\
+            prerequisites_dict[course].append(pre)\
+        for course in list(prerequisites_dict):\
+            dfs([course])\
+        \
+        return answer\
+}

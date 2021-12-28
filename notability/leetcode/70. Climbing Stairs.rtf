@@ -1,0 +1,59 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{disc\}}{\leveltext \'01\'95}{\levelnumbers;}\fi-500\li0\lin0}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{circle\}}{\leveltext \'01\uc0\u9702 _;}{\levelnumbers;}\fi-500\li500\lin500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{diamond\}}{\leveltext \'01\uc0\u9656 _;}{\levelnumbers;}\fi-500\li1000\lin1000}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{disc\}}{\leveltext \'01\'95}{\levelnumbers;}\fi-500\li1500\lin1500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{circle\}}{\leveltext \'01\uc0\u9702 _;}{\levelnumbers;}\fi-500\li2000\lin2000}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{diamond\}}{\leveltext \'01\uc0\u9656 _;}{\levelnumbers;}\fi-500\li2500\lin2500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{disc\}}{\leveltext \'01\'95}{\levelnumbers;}\fi-500\li3000\lin3000}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{circle\}}{\leveltext \'01\uc0\u9702 _;}{\levelnumbers;}\fi-500\li3500\lin3500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{diamond\}}{\leveltext \'01\uc0\u9656 _;}{\levelnumbers;}\fi-500\li4000\lin4000}
+{\listname ;}\listid1478931860}
+}
+{\*\listoverridetable{\listoverride\listid1478931860\listoverridecount0\ls1478931860}}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u45817 \uc0\u49888 \uc0\u51008  \uc0\u44228 \uc0\u45800 \uc0\u51012 \uc0\u50724 \uc0\u47476 \uc0\u44256  \uc0\u51080 \uc0\u45796 . \uc0\u51221 \uc0\u49345 \uc0\u50640  \uc0\u46020 \uc0\u45804 \uc0\u54616 \uc0\u44592  \uc0\u50948 \uc0\u54644  n \uc0\u44228 \uc0\u45800 \uc0\u51012  \uc0\u50732 \uc0\u46972 \uc0\u50556  \uc0\u54620 \uc0\u45796 . \uc0\u47588 \uc0\u48264  \uc0\u44033 \uc0\u44033  1\uc0\u44228 \uc0\u45800  \uc0\u46608 \uc0\u45716  2\uc0\u44228 \uc0\u45800 \uc0\u50473  \uc0\u50724 \uc0\u47484  \uc0\u49688  \uc0\u51080 \uc0\u45796 \uc0\u47732  \uc0\u51221 \uc0\u49345 \uc0\u50640  \uc0\u46020 \uc0\u45804 \uc0\u54616 \uc0\u44592  \uc0\u50948 \uc0\u54620  \uc0\u48169 \uc0\u48277 \uc0\u51008  \uc0\u47751  \uc0\u44032 \uc0\u51648  \uc0\u44221 \uc0\u47196 \uc0\u44032  \uc0\u46104 \uc0\u45716 \uc0\u51648  \uc0\u44228 \uc0\u49328 \uc0\u54616 \uc0\u46972 .\
+\
+Input: n = 2\
+Output: 2\
+Explanation: There are two ways to climb to the top.\
+1. 1 step + 1 step\
+2. 2 steps\
+\
+1.\uc0\u48652 \uc0\u47336 \uc0\u53944  \uc0\u54252 \uc0\u49828  \uc0\u51116 \uc0\u44480 \
+class Solution:\
+    def climbStairs(self, n: int) -> int:\
+        if n == 1:\
+            return 1\
+        if n == 2:\
+            return 2\
+        return self.climbStairs(n - 1) + self.climbStairs(n - 2)\
+\
+2.\uc0\u45796 \uc0\u51060 \uc0\u45208 \uc0\u48121  \uc0\u54532 \uc0\u47196 \uc0\u44536 \uc0\u47000 \uc0\u48141 \
+class Solution:\
+    dp = \{\}\
+    def climbStairs(self, n: int) -> int:\
+        if n <= 2:\
+            return n\
+        if n in self.dp:\
+            return self.dp[n]\
+        self.dp[n] = self.climbStairs(n - 1) + self.climbStairs(n - 2)\
+        return self.dp[n]\
+\
+\pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi-1000\li2000
+\ls1478931860\ilvl2{\listtext    \uc0\u9656    }\uc0\u47700 \uc0\u47784 \uc0\u51060 \uc0\u51228 \uc0\u51060 \uc0\u49496 \
+\pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\
+class Solution:\
+    stairs = \{\}\
+    \
+    def climbStairs(self, n: int) -> int:\
+        if n < 3:\
+            \
+            return n\
+        if n not in self.stairs:\
+            self.stairs[n] = self.climbStairs(n - 2) + self.climbStairs(n - 1)\
+            \
+        return self.stairs[n]}

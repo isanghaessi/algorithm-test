@@ -1,0 +1,116 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u53328 \uc0\u47484  \uc0\u51060 \uc0\u50857 \uc0\u54644  \uc0\u45796 \uc0\u51020  \uc0\u50672 \uc0\u49328 \uc0\u51012  \uc0\u51648 \uc0\u50896 \uc0\u54616 \uc0\u45716  \uc0\u49828 \uc0\u53469 \uc0\u51012  \uc0\u44396 \uc0\u54788 \uc0\u54616 \uc0\u46972 .\
+\
+\uc0\u8226 \	void push(int x) Pushes element x to the top of the stack.\
+\uc0\u8226 \	int pop() Removes the element on the top of the stack and returns it.\
+\uc0\u8226 \	int top() Returns the element on the top of the stack.\
+\uc0\u8226 \	boolean empty() Returns true if the stack is empty, false otherwise.\
+\
+1.deque\
+class MyStack:\
+\
+    def __init__(self):\
+        """\
+        Initialize your data structure here.\
+        """\
+        self.q = collections.deque()\
+\
+    def push(self, x: int) -> None:\
+        """\
+        Push element x onto stack.\
+        """\
+        self.q.append(x)\
+        for _ in range(len(self.q) - 1):\
+            self.q.append(self.q.popleft())\
+\
+    def pop(self) -> int:\
+        """\
+        Removes the element on top of the stack and returns that element.\
+        """\
+        return self.q.popleft()\
+\
+    def top(self) -> int:\
+        """\
+        Get the top element.\
+        """\
+        return self.q[0]\
+\
+    def empty(self) -> bool:\
+        """\
+        Returns whether the stack is empty.\
+        """\
+        return len(self.q) == 0\
+\
+\
+# Your MyStack object will be instantiated and called as such:\
+# obj = MyStack()\
+# obj.push(x)\
+# param_2 = obj.pop()\
+# param_3 = obj.top()\
+# param_4 = obj.empty()\
+\
+class MyStack:\
+\
+    def __init__(self):\
+        """\
+        Initialize your data structure here.\
+        """\
+        self._stack = []\
+        self._top = 0\
+        \
+\
+    def push(self, x: int) -> None:\
+        """\
+        Push element x onto _stack.\
+        """\
+        self._stack.append(x)\
+        self._top += 1\
+        \
+\
+    def pop(self) -> int:\
+        """\
+        Removes the element on _top of the _stack and returns that element.\
+        """\
+        temp = []\
+        for i in range(self._top):\
+            if i == self._top - 1:\
+                \
+                result = self._stack.pop(0)\
+                self._stack = temp\
+                self._top -= 1\
+                \
+                return result\
+            else:\
+                temp.append(self._stack.pop(0))\
+        \
+\
+    def top(self) -> int:\
+        """\
+        Get the _top element.\
+        """\
+        \
+        return self._stack[self._top - 1]\
+        \
+\
+    def empty(self) -> bool:\
+        """\
+        Returns whether the _stack is empty.\
+        """\
+        \
+        return self._top == 0\
+        \
+\
+# Your MyStack object will be instantiated and called as such:\
+# obj = MyStack()\
+# obj.push(x)\
+# param_2 = obj.pop()\
+# param_3 = obj.top()\
+# param_4 = obj.empty()\
+\
+\
+}

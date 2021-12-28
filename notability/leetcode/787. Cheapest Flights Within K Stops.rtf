@@ -1,0 +1,88 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u49884 \uc0\u51089 \uc0\u51216 \uc0\u50640 \uc0\u49436  \uc0\u46020 \uc0\u52265 \uc0\u51216 \uc0\u44620 \uc0\u51648 \uc0\u51032  \uc0\u44032 \uc0\u51109  \uc0\u51200 \uc0\u47156 \uc0\u54620  \uc0\u44032 \uc0\u44201 \uc0\u51012  \uc0\u44228 \uc0\u49328 \uc0\u54616 \uc0\u46104 , K\uc0\u44060 \uc0\u51032  \uc0\u44221 \uc0\u50976 \uc0\u51648  \uc0\u51060 \uc0\u45236 \uc0\u50640  \uc0\u46020 \uc0\u52265 \uc0\u54616 \uc0\u45716  \uc0\u44032 \uc0\u44201 \uc0\u51012  \uc0\u47532 \uc0\u53556 \uc0\u54616 \uc0\u46972 . \uc0\u44221 \uc0\u47196 \uc0\u44032  \uc0\u51316 \uc0\u51116 \uc0\u54616 \uc0\u51648  \uc0\u50506 \uc0\u51012  \uc0\u44221 \uc0\u50864  -1 \uc0\u51012  \uc0\u47532 \uc0\u53556 \uc0\u54620 \uc0\u45796 .\
+\
+Input: \
+n = 3, edges = [[0,1,100],[1,2,100],[0,2,500]]\
+src = 0, dst = 2, k = 1\
+Output: 200\
+\
+1.dijkstra\
+import collections\
+import heapq\
+\
+class Solution:\
+    def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, K: int) -> int:\
+        graph = collections.defaultdict(list)\
+        for u, v, w in flights:\
+            graph[u].append((v,w))\
+        q = [(0, src, K)]\
+        while len(q) > 0:\
+            time, node, count = heapq.heappop(q)\
+            if node == dst:\
+                return time\
+            if count >= 0:\
+                for v, w in graph[node]:\
+                    alt = time + w\
+                    heapq.heappush(q, (alt, v, count - 1))\
+        return -1\
+\
+import collections\
+import heapq\
+\
+class Solution:\
+    def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:\
+        graph = collections.defaultdict(dict)\
+        counts = collections.defaultdict(int)\
+        hq = [(0, src, 0)]\
+        for f, t, p in flights:\
+            graph[f][t] = p\
+        for i in range(n):\
+            counts[i] = k + 1\
+        while len(hq) > 0 :\
+            price, city, count = heapq.heappop(hq)\
+            if city == dst:\
+\
+                return price\
+            if counts[city] >= count and count + 1 <= k + 1:\
+                counts[city] = count\
+                for t, p in graph[city].items():\
+                    heapq.heappush(hq, (price + p, t, count + 1))\
+\
+        return -1\
+\
+import collections\
+import heapq\
+\
+class Solution:\
+    def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:\
+        flights_dict = collections.defaultdict(list)\
+        for fr, to , pr in flights:\
+            flights_dict[fr].append([pr, to])\
+        prices = collections.defaultdict(lambda :float('inf'))\
+        nofs = collections.defaultdict(int)\
+        hq = [[0, src, 0]]\
+        while len(hq) > 0:\
+            pr, to, nof = heapq.heappop(hq)\
+            if to == dst:\
+                    \
+                return pr\
+            if (pr < prices[to] or nof < nofs[to]) and nof < k + 1:\
+                prices[to] = pr\
+                nofs[to] = nof\
+                for npr, nto in flights_dict[to]:\
+                    heapq.heappush(hq, [pr + npr, nto, nof + 1])\
+                    \
+        return -1\
+\
+\
+\
+\
+\
+\
+\
+}

@@ -1,0 +1,72 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u51204 \uc0\u52404  \uc0\u49688  n\uc0\u51012  \uc0\u51077 \uc0\u47141 \uc0\u48155 \uc0\u50500  k\uc0\u44060 \uc0\u51032  \uc0\u51312 \uc0\u54633 \uc0\u51012  \uc0\u47532 \uc0\u53556 \uc0\u54616 \uc0\u46972 .\
+\
+Input: n = 4, k = 2\
+Output:\
+[\
+  [2,4],\
+  [3,4],\
+  [2,3],\
+  [1,2],\
+  [1,3],\
+  [1,4],\
+]\
+\
+1.dfs\
+import itertools\
+\
+class Solution:\
+    def combine(self, n: int, k: int) -> List[List[int]]:\
+        def dfs(cur, nex):\
+            if len(cur) == k:\
+                result.append(cur)\
+                return\
+            for i, n in enumerate(nex):\
+                _cur = cur[:]\
+                _nex = nex[i + 1:]\
+                _cur.append(n)\
+                dfs(_cur, _nex)\
+    \
+        result = []\
+        nums = [_n for _n in range(1, n + 1)]\
+        dfs([], nums)\
+        return result\
+\
+2.itertools.combinations \uc0\u47784 \uc0\u46280 \
+import itertools\
+\
+class Solution:\
+    def combine(self, n: int, k: int) -> List[List[int]]:\
+        return list(itertools.combinations(range(1, n + 1), k))\
+\
+import itertools\
+\
+class Solution:\
+    def combine(self, n: int, k: int) -> List[List[int]]:\
+        return list(itertools.combinations([i for i in range(1, n + 1)], k))\
+\
+import itertools\
+\
+class Solution:\
+    def combine(self, n: int, k: int) -> List[List[int]]:\
+        result = []\
+        \
+        def dfs(comb, nums):\
+            if len(comb) == k:\
+                result.append(comb)\
+            if len(nums) == 0:\
+                \
+                return\
+            for i in range(len(nums)):\
+                dfs(comb + [nums[i]], nums[i + 1:])\
+\
+                \
+        dfs([], [i for i in range(1, n + 1)])\
+\
+        return result\
+}

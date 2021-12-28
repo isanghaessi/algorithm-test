@@ -1,0 +1,51 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u54637 \uc0\u47785 \uc0\u46308 \uc0\u51012  \uc0\u51312 \uc0\u54633 \uc0\u54616 \uc0\u50668  \uc0\u47564 \uc0\u46308  \uc0\u49688  \uc0\u51080 \uc0\u45716  \uc0\u44032 \uc0\u51109  \uc0\u53360  \uc0\u49688 \uc0\u47484  \uc0\u52636 \uc0\u47141 \uc0\u54616 \uc0\u46972 .\
+\
+Input: nums = [10,2]\
+Output: "210"\
+\
+1.'a'+'b' > 'b' + 'a' \uc0\u48708 \uc0\u44368  \uc0\u51221 \uc0\u47148 \
+class Solution:\
+    def largestNumber(self, nums: List[int]) -> str:\
+        for i in range(len(nums) - 1):\
+            for j in range(len(nums) - 1 - i):\
+                if str(nums[j]) + str(nums[j + 1]) < str(nums[j + 1]) + str(nums[j]):\
+                    nums[j], nums[j + 1] = nums[j + 1], nums[j]\
+        return str(int(''.join([str(n) for n in nums])))\
+\
+\
+class Solution:\
+    @staticmethod\
+    def to_swap(n1: int, n2: int) -> bool:\
+        return str(n1) + str(n2) < str(n2) + str(n1)\
+\
+\
+    def largestNumber(self, nums: List[int]) -> str:\
+        i = 1\
+        while i < len(nums):\
+            j = i\
+            while j > 0 and self.to_swap(nums[j - 1], nums[j]):\
+                nums[j], nums[j - 1] = nums[j - 1], nums[j]\
+                j -= 1\
+            i += 1\
+        return str(int(''.join(map(str, nums))))\
+\
+from functools import cmp_to_key\
+\
+class Solution:\
+    def largestNumber(self, nums: List[int]) -> str:\
+        return str(int(''.join(sorted([str(n) for n in nums], key = cmp_to_key(lambda a, b:-1 if int(a + b) < int(b + a) else 1), reverse = True))))\
+\
+import functools\
+\
+class Solution:\
+    def largestNumber(self, nums: List[int]) -> str:\
+        \
+        return str(int(''.join(map(str, sorted(nums, key = functools.cmp_to_key(lambda a, b: int(str(b) + str(a)) - int(str(a) + str(b))))))))\
+\
+}

@@ -1,0 +1,60 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u51473 \uc0\u48373  \uc0\u47928 \uc0\u51088 \uc0\u44032  \uc0\u50630 \uc0\u45716  \uc0\u44032 \uc0\u51109  \uc0\u44596  \uc0\u48512 \uc0\u48516  \uc0\u47928 \uc0\u51088 \uc0\u50676 \uc0\u51040  \uc0\u44600 \uc0\u51060 \uc0\u47484  \uc0\u47532 \uc0\u53556 \uc0\u54616 \uc0\u46972 .\
+\
+Input: s = "abcabcbb"\
+Output: 3\
+Explanation: The answer is "abc", with the length of 3.\
+\
+1.\uc0\u53804  \uc0\u54252 \uc0\u51064 \uc0\u53552  \uc0\u54876 \uc0\u50857 \
+class Solution:\
+    def lengthOfLongestSubstring(self, s: str) -> int:\
+        used = \{\}\
+        max_len = start = 0\
+        for i, c in enumerate(s):\
+            if c in used and start <= used[c]:\
+                start = used[c] + 1\
+            else:\
+                max_len = max(max_len, i - start + 1)\
+            used[c] = i\
+        return max_len\
+\
+class Solution:\
+    def lengthOfLongestSubstring(self, s: str) -> int:\
+        result = 0\
+        left = 0\
+        for right in range(len(s)):\
+            if s[right] not in s[left:right]:\
+                result = max(result, len(s[left:right + 1]))\
+            else:\
+                left = left + s[left:right].index(s[right]) + 1\
+        \
+        return result\
+\
+import collections\
+\
+class Solution:\
+    def lengthOfLongestSubstring(self, s: str) -> int:\
+        answer = 0\
+        left = 0\
+        right = 1\
+        while left < right and right <= len(s):\
+            while right <= len(s) and collections.Counter(s[left:right]).most_common(1)[0][1] < 2:\
+                answer = max(answer, len(s[left:right]))\
+                right += 1\
+            while left < right and collections.Counter(s[left:right]).most_common(1)[0][1] > 1:\
+                left += 1\
+        return answer\
+\
+\
+\
+\
+\
+\
+\
+\
+}

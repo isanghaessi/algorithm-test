@@ -1,0 +1,64 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+J\uc0\u45716  \uc0\u48372 \uc0\u49437 \uc0\u51060 \uc0\u47728 , S\uc0\u45716  \uc0\u44054 \uc0\u44256  \uc0\u51080 \uc0\u45716  \uc0\u46028 \uc0\u51060 \uc0\u45796 . S\uc0\u50640 \uc0\u45716  \uc0\u48372 \uc0\u49437 \uc0\u51060  \uc0\u47751  \uc0\u44060 \uc0\u45208  \uc0\u51080 \uc0\u51012 \uc0\u44620 ? \uc0\u45824 \uc0\u49548 \uc0\u47928 \uc0\u51088 \uc0\u45716  \uc0\u44396 \uc0\u48516 \uc0\u54620 \uc0\u45796 .\
+\
+Input: jewels = "aA", stones = "aAAbbbb"\
+Output: 3\
+\
+1.\uc0\u49483 \
+class Solution:\
+    def numJewelsInStones(self, jewels: str, stones: str) -> int:\
+        result = 0\
+        j = set()\
+        for c in jewels:\
+            j.add(c)\
+        for s in stones:\
+            if s in j:\
+                result += 1\
+        return result\
+\
+2.\uc0\u46357 \uc0\u49492 \uc0\u45320 \uc0\u47532 \
+class Solution:\
+    def numJewelsInStones(self, jewels: str, stones: str) -> int:\
+        result = 0\
+        freqs = collections.defaultdict(int)\
+        for s in stones:\
+            freqs[s] += 1\
+        for j in jewels:\
+            if j in freqs:\
+                result += freqs[j]\
+        return result\
+\
+\
+3.collections.Counter\
+class Solution:\
+    def numJewelsInStones(self, jewels: str, stones: str) -> int:\
+        freqs = collections.Counter(stones)\
+        result = 0\
+        for j in jewels:\
+            result += freqs[j]\
+        return result\
+\
+4.\uc0\u54028 \uc0\u51060 \uc0\u50028  \uc0\u45796 \uc0\u50868 \
+class Solution:\
+    def numJewelsInStones(self, jewels: str, stones: str) -> int:\
+        return sum([s in jewels for s in stones])\
+\
+class Solution:\
+    def numJewelsInStones(self, jewels: str, stones: str) -> int:\
+        result = 0\
+        for s in stones:\
+            if s in jewels:\
+                result += 1\
+        \
+        return result\
+\
+\
+\
+\
+\
+}

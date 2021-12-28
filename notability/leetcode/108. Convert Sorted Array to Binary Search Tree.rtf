@@ -1,0 +1,63 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u50724 \uc0\u47492 \uc0\u52264 \uc0\u49692 \uc0\u51004 \uc0\u47196  \uc0\u51221 \uc0\u47148 \uc0\u46108  \uc0\u48176 \uc0\u50676 \uc0\u51012  \uc0\u45458 \uc0\u51060  \uc0\u44512 \uc0\u54805  \uc0\u51060 \uc0\u51652  \uc0\u53456 \uc0\u49353  \uc0\u53944 \uc0\u47532 \uc0\u47196  \uc0\u48320 \uc0\u54872 \uc0\u54616 \uc0\u46972 .\
+\
+Input: nums = [-10,-3,0,5,9]\
+Output: [0,-3,9,-10,null,5]\
+\
+# Definition for a binary tree node.\
+# class TreeNode:\
+#     def __init__(self, val=0, left=None, right=None):\
+#         self.val = val\
+#         self.left = left\
+#         self.right = right\
+\
+1.\uc0\u51473 \uc0\u44036  \uc0\u51064 \uc0\u45937 \uc0\u49828  \uc0\u51116 \uc0\u44480 \
+class Solution:\
+    def sortedArrayToBST(self, nums: List[int]) -> TreeNode:\
+        if not nums:\
+            return None\
+        mid = len(nums) // 2\
+        node = TreeNode(nums[mid])\
+        node.left = self.sortedArrayToBST(nums[:mid])\
+        node.right = self.sortedArrayToBST(nums[mid + 1:])\
+        return node\
+\
+# Definition for a binary tree node.\
+# class TreeNode:\
+#     def __init__(self, val=0, left=None, right=None):\
+#         self.val = val\
+#         self.left = left\
+#         self.right = right\
+class Solution:\
+    def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:\
+        def insert(node, num):\
+            if not node:\
+                \
+                return TreeNode(num)\
+            if num <= node.val:\
+                node.left = insert(node.left, num)\
+            else:\
+                node.right = insert(node.right, num)\
+                \
+            return node\
+        \
+        \
+        def divide(nums, root):\
+            \
+            if len(nums) < 1:\
+                \
+                return root\
+            mid_index = len(nums) // 2\
+            root = insert(root, nums[mid_index])\
+            root = divide(nums[:mid_index], root)\
+            root = divide(nums[mid_index + 1:], root)\
+            \
+            return root\
+        \
+        \
+        return divide(nums, None)}

@@ -1,0 +1,64 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u50500 \uc0\u51060 \uc0\u46308 \uc0\u50640 \uc0\u44172  1\uc0\u44060 \uc0\u50473  \uc0\u53216 \uc0\u53412 \uc0\u47484  \uc0\u45208 \uc0\u45600 \uc0\u51480 \uc0\u50556  \uc0\u54620 \uc0\u45796 . \uc0\u44033 \uc0\u50500 \uc0\u51060  child_i\uc0\u47560 \uc0\u45796  \uc0\u44536 \uc0\u47532 \uc0\u46300  \uc0\u54057 \uc0\u53552  gi\uc0\u47484  \uc0\u44054 \uc0\u44256  \uc0\u51080 \uc0\u51004 \uc0\u47728 , \uc0\u51060 \uc0\u45716  \uc0\u50500 \uc0\u51060 \uc0\u44032  \uc0\u47564 \uc0\u51313 \uc0\u54616 \uc0\u45716  \uc0\u52572 \uc0\u49548  \uc0\u53216 \uc0\u53412 \uc0\u51032  \uc0\u53356 \uc0\u44592 \uc0\u47484  \uc0\u47568 \uc0\u54620 \uc0\u45796 . \uc0\u44033  \uc0\u53216 \uc0\u53412  cookie_j\uc0\u45716  \uc0\u53356 \uc0\u44592  sj\uc0\u47484  \uc0\u44054 \uc0\u44256  \uc0\u51080 \uc0\u51004 \uc0\u47728 , sj >= gi\uc0\u51060 \uc0\u50612 \uc0\u50556  \uc0\u50500 \uc0\u51060 \uc0\u44032  \uc0\u47564 \uc0\u51313 \uc0\u54616 \uc0\u50668  \uc0\u53216 \uc0\u53412 \uc0\u47484  \uc0\u48155 \uc0\u45716 \uc0\u45796 . \uc0\u52572 \uc0\u45824  \uc0\u47751  \uc0\u47749 \uc0\u51032  \uc0\u50500 \uc0\u51060 \uc0\u46308 \uc0\u50640 \uc0\u44172  \uc0\u53216 \uc0\u53412 \uc0\u47484  \uc0\u51460  \uc0\u49688  \uc0\u51079 \uc0\u45716 \uc0\u51648  \uc0\u52636 \uc0\u47141 \uc0\u54616 \uc0\u46972 .\
+\
+Input: g = [1,2,3], s = [1,1]\
+Output: 1\
+Explanation: You have 3 children and 2 cookies. The greed factors of 3 children are 1, 2, 3. \
+And even though you have 2 cookies, since their size is both 1, you could only make the child whose greed factor is 1 content.\
+You need to output 1.\
+\
+1.\uc0\u44536 \uc0\u47532 \uc0\u46356 \
+class Solution:\
+    def findContentChildren(self, g: List[int], s: List[int]) -> int:\
+        result = 0\
+        for _s in s:\
+            temp = [_g for _g in g if _g <= _s]\
+            if len(temp) > 0:\
+                g.remove(max(temp))\
+                result += 1\
+        return result\
+\
+class Solution:\
+    def findContentChildren(self, g: List[int], s: List[int]) -> int:\
+        g.sort()\
+        s.sort()\
+        i = j = 0\
+        while i < len(g) and j < len(s):\
+            if s[j] >= g[i]:\
+                i += 1\
+            j += 1\
+        return i\
+\
+2.\uc0\u51060 \uc0\u51652  \uc0\u44160 \uc0\u49353 \
+import bisect\
+\
+class Solution:\
+    def findContentChildren(self, g: List[int], s: List[int]) -> int:\
+        g.sort()\
+        s.sort()\
+        result = 0\
+        for i in s:\
+            index = bisect.bisect_right(g, i)\
+            if index > result:\
+                result += 1\
+        return result\
+\
+class Solution:\
+    def findContentChildren(self, g: List[int], s: List[int]) -> int:\
+        answer = 0\
+        g.sort()\
+        s.sort(reverse = True)\
+        for _s in s:\
+            while len(g) > 0:\
+                biggest_child = g.pop()\
+                if biggest_child <= _s:\
+                    answer += 1\
+                    \
+                    break\
+        \
+        return answer}

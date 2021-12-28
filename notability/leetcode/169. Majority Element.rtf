@@ -1,0 +1,66 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u44284 \uc0\u48152 \uc0\u49688 \uc0\u47484  \uc0\u52264 \uc0\u51648 \uc0\u54616 \uc0\u45716 (\uc0\u51208 \uc0\u48152 \uc0\u51012  \uc0\u52488 \uc0\u44284 \uc0\u54616 \uc0\u45716 ) \uc0\u50648 \uc0\u47532 \uc0\u47676 \uc0\u53944 \uc0\u47484  \uc0\u52636 \uc0\u47141 \uc0\u54616 \uc0\u46972 .\
+\
+Input: nums = [3,2,3]\
+Output: 3\
+\
+1.\uc0\u48652 \uc0\u47336 \uc0\u53944 \uc0\u54252 \uc0\u49828 \
+class Solution:\
+    def majorityElement(self, nums: List[int]) -> int:\
+        for n in nums:\
+            if nums.count(n) > len(nums) // 2:\
+                return n\
+\
+2.\uc0\u45796 \uc0\u51060 \uc0\u45208 \uc0\u48121  \uc0\u54532 \uc0\u47196 \uc0\u44536 \uc0\u47000 \uc0\u48141 \
+import collections\
+\
+class Solution:\
+    def majorityElement(self, nums: List[int]) -> int:\
+        counts = collections.defaultdict(int)\
+        for num in nums:\
+            if counts[num] == 0:\
+                counts[num] = nums.count(num)\
+            if counts[num] > len(nums) // 2:\
+                return num\
+\
+3.\uc0\u48516 \uc0\u54624  \uc0\u51221 \uc0\u48373 \
+import collections\
+\
+class Solution:\
+    def majorityElement(self, nums: List[int]) -> int:\
+        if not nums:\
+            return None\
+        if len(nums) == 1:\
+            return nums[0]\
+        half = len(nums) // 2\
+        a = self.majorityElement(nums[:half])\
+        b = self.majorityElement(nums[half:])\
+        return [b, a][nums.count(a) > half]\
+\
+4.\uc0\u54028 \uc0\u51060 \uc0\u50028  \uc0\u45796 \uc0\u50868 \
+class Solution:\
+    def majorityElement(self, nums: List[int]) -> int:\
+        return sorted(nums)[len(nums) // 2]\
+\
+import collections\
+\
+class Solution:\
+    def majorityElement(self, nums: List[int]) -> int:\
+        \
+        return collections.Counter(nums).most_common(1)[0][0\
+\
+class Solution:\
+    def majorityElement(self, nums: List[int]) -> int:\
+        if len(nums) < 2:\
+            \
+            return nums[0]\
+        mid = len(nums) // 2\
+        left = self.majorityElement(nums[:mid])\
+        right = self.majorityElement(nums[mid:])\
+        \
+        return left if nums.count(left) > mid else right]}

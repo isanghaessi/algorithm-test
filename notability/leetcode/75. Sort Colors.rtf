@@ -1,0 +1,56 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u48744 \uc0\u44036 \uc0\u49353 \uc0\u51012  0, \uc0\u55152 \uc0\u49353 \uc0\u51012  1, \uc0\u54028 \uc0\u46976 \uc0\u49353 \uc0\u51012  2\uc0\u46972  \uc0\u54624  \uc0\u46412  \uc0\u49692 \uc0\u49436 \uc0\u45824 \uc0\u47196  \uc0\u51064 \uc0\u51217 \uc0\u54616 \uc0\u45716  \uc0\u51228 \uc0\u51088 \uc0\u47532  \uc0\u51221 \uc0\u47148 \uc0\u51012  \uc0\u49688 \uc0\u54665 \uc0\u54616 \uc0\u46972 .\
+\
+Input: nums = [2,0,2,1,1,0]\
+Output: [0,0,1,1,2,2]\
+\
+1.\uc0\u54016  \uc0\u49548 \uc0\u53944 \
+class Solution:\
+    def sortColors(self, nums: List[int]) -> None:\
+        """\
+        Do not return anything, modify nums in-place instead.\
+        """\
+        nums.sort()\
+        return nums\
+\
+\
+3.\uc0\u45348 \uc0\u45916 \uc0\u46976 \uc0\u46300  \uc0\u44397 \uc0\u44592  \uc0\u47928 \uc0\u51228 (3\uc0\u54252 \uc0\u51064 \uc0\u53552 )\
+class Solution:\
+    def sortColors(self, nums: List[int]) -> None:\
+        red, white, blue = 0, 0, len(nums) - 1\
+\
+        while white <= blue:\
+            if nums[white] < 1:\
+                nums[red], nums[white] = nums[white], nums[red]\
+                white += 1\
+                red += 1\
+            elif nums[white] > 1:\
+                nums[white], nums[blue] = nums[blue], nums[white]\
+                blue -= 1\
+            else:\
+                white += 1\
+\
+class Solution:\
+    def sortColors(self, nums: List[int]) -> None:\
+        """\
+        Do not return anything, modify nums in-place instead.\
+        """\
+        red, white, blue = 0, 0, len(nums) - 1\
+        while white <= blue:\
+            if nums[white] < 1:\
+                nums[red], nums[white] = nums[white], nums[red]\
+                red += 1\
+                white += 1\
+            elif nums[white] == 1:\
+                white += 1\
+            else:\
+                nums[white], nums[blue] = nums[blue], nums[white]\
+                blue -= 1\
+                \
+        return nums\
+}

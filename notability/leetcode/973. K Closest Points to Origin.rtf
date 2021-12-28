@@ -1,0 +1,62 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u54217 \uc0\u47732 \uc0\u49345 \uc0\u50640  points \uc0\u47785 \uc0\u47197 \uc0\u51060  \uc0\u51080 \uc0\u51012  \uc0\u46412 , \uc0\u50896 \uc0\u51216  (0, 0)\uc0\u50640 \uc0\u49436  K\uc0\u48264  \uc0\u44032 \uc0\u44620 \uc0\u50868 \uc0\u51216  \uc0\u47785 \uc0\u47197 \uc0\u51012  \uc0\u49692 \uc0\u49436 \uc0\u45824 \uc0\u47196  \uc0\u52636 \uc0\u47141 \uc0\u54616 \uc0\u46972 . \uc0\u54217 \uc0\u47732 \uc0\u49345  \uc0\u46160  \uc0\u51216 \uc0\u51032  \uc0\u44144 \uc0\u47532 \uc0\u45716  \uc0\u50976 \uc0\u53364 \uc0\u47532 \uc0\u46300  \uc0\u44144 \uc0\u47532 \uc0\u47196  \uc0\u54620 \uc0\u45796 .\
+\
+Input: points = [[1,3],[-2,2]], k = 1\
+Output: [[-2,2]]\
+\
+1.heapq\
+import heapq\
+\
+class Solution:\
+    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:\
+        def calculate(point):\
+            return [point[0]**2 + point[1]**2, point]\
+        \
+        result = heapq.nsmallest(k, [calculate(p) for p in points])\
+        return [r[1] for r in result]\
+\
+\
+import heapq\
+\
+class Solution:\
+    def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:\
+        heap = []\
+        for (x, y) in points:\
+            dist = x ** 2 + y ** 2\
+            heapq.heappush(heap, (dist, x, y))\
+        result = []\
+        for _ in range(K):\
+            (dist, x, y) = heapq.heappop(heap)\
+            result.append((x, y))\
+        return result\
+\
+import math\
+import heapq\
+\
+class Solution:\
+    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:\
+        distances = [(math.sqrt(x * x + y * y), i) for i, (x, y) in enumerate(points)]\
+        k_smallest = heapq.nsmallest(k, distances)\
+    \
+        return [points[ks[1]] for ks in k_smallest]\
+\
+import math\
+import heapq\
+\
+class Solution:\
+    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:\
+        distances = [(math.sqrt(x ** 2 + y ** 2), i) for i, (x, y) in enumerate(points)]\
+        k_smallest = heapq.nsmallest(k, distances)\
+    \
+        return [points[ks[1]] for ks in k_smallest]\
+        \
+        \
+\
+\
+\
+}

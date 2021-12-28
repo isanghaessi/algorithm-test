@@ -1,0 +1,66 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u51452 \uc0\u50612 \uc0\u51652  \uc0\u47928 \uc0\u51088 \uc0\u50676 \uc0\u51060  \uc0\u54060 \uc0\u46300 \uc0\u47212 \uc0\u51064 \uc0\u51648  \uc0\u54869 \uc0\u51064 \uc0\u54616 \uc0\u46972 . \uc0\u45824 \uc0\u49548 \uc0\u47928 \uc0\u51088 \uc0\u47484  \uc0\u44396 \uc0\u48516 \uc0\u54616 \uc0\u51648  \uc0\u50506 \uc0\u51004 \uc0\u47728 , \uc0\u50689 \uc0\u47928 \uc0\u51088 \uc0\u50752  \uc0\u49707 \uc0\u51088 \uc0\u47564 \uc0\u51012  \uc0\u45824 \uc0\u49345 \uc0\u51004 \uc0\u47196  \uc0\u54620 \uc0\u45796 .\
+\
+Input = "A man, a plan, a canal: Panama"\
+Output = true\
+\
+1.\uc0\u47532 \uc0\u49828 \uc0\u53944  \uc0\u54876 \uc0\u50857 \
+def isPalindrome(s: str) -> bool:\
+    # \uc0\u47928 \uc0\u51088 \uc0\u50676 \uc0\u51032  \uc0\u54596 \uc0\u50836 \uc0\u50630 \uc0\u45716  \uc0\u47928 \uc0\u51088 \uc0\u46308  \uc0\u49325 \uc0\u51228 \
+    strs = []\
+    for char in s:\
+        if char.isalnum():\
+            strs.append(char.lower())\
+    # \uc0\u54064 \uc0\u47536 \uc0\u46300 \uc0\u47212  \uc0\u54869 \uc0\u51064 \
+    while len(strs) > 1:\
+        if strs.pop(0) != strs.pop():\
+            return False\
+    return True\
+\
+    \uc0\u8227  \uc0\u44592 \uc0\u48376 \uc0\u51201 \uc0\u51064  \uc0\u47532 \uc0\u49828 \uc0\u53944 \uc0\u47484  \uc0\u51060 \uc0\u50857 \uc0\u54620  \uc0\u48169 \uc0\u48277 \uc0\u51060 \uc0\u45796 .\
+\
+2.\uc0\u45936 \uc0\u53356  \uc0\u54876 \uc0\u50857 \
+def isPalindrome(s: str) -> bool:\
+    # \uc0\u45936 \uc0\u53356  \uc0\u54876 \uc0\u50857 \
+    strs: Deque = collections.deque()\
+    for char in s:\
+        if char.isalnum():\
+            strs.append(char.lower())\
+    while len(strs) > 1:\
+        if strs.popleft() != strs.pop():\
+            return False\
+    return True\
+\
+    \uc0\u8227  \uc0\u45936 \uc0\u53356 \uc0\u47484  \uc0\u54876 \uc0\u50857 \uc0\u54644 \uc0\u49436  pop(0)\uc0\u51032  O(n)\uc0\u51012  pop left()\uc0\u51032  O(1)\uc0\u47196  \uc0\u52572 \uc0\u51201 \uc0\u54868  \uc0\u54664 \uc0\u45796 .\
+\
+3.\uc0\u49836 \uc0\u46972 \uc0\u51060 \uc0\u49905 , \uc0\u51221 \uc0\u44508 \uc0\u49885  \uc0\u54876 \uc0\u50857 \
+def isPalindrome(s: str) -> bool:\
+    s = s.lower()\
+    s = re.sub('[^a-z0-9]', '', s)\
+    return s == s[::-1]\
+\
+    \uc0\u8227  \uc0\u51221 \uc0\u44508 \uc0\u49885 \uc0\u51012  \uc0\u54876 \uc0\u50857 \uc0\u54644 \uc0\u49436  \uc0\u54596 \uc0\u50836 \uc0\u50630 \uc0\u45716  \uc0\u47928 \uc0\u51088 \uc0\u47484  \uc0\u44152 \uc0\u47084 \uc0\u45236 \uc0\u44256 , \uc0\u49836 \uc0\u46972 \uc0\u51060 \uc0\u49905 \uc0\u51012  \uc0\u53685 \uc0\u54644 \uc0\u49436  \uc0\u48708 \uc0\u44368 \uc0\u54620 \uc0\u45796 .\
+    \uc0\u8227  \uc0\u54028 \uc0\u51060 \uc0\u50028 \uc0\u45796 \uc0\u50868  \uc0\u54400 \uc0\u51060 \uc0\u45796 .\
+\
+import re\
+\
+class Solution:\
+    def isPalindrome(self, s: str) -> bool:\
+        s = s.lower()\
+        s = re.sub(r'[^a-z0-9]', '', s)\
+        print(s, s[::-1])\
+        return s == s[::-1]\
+\
+\
+\
+\
+\
+\
+\
+\
+}

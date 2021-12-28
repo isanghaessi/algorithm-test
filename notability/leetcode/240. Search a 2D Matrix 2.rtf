@@ -1,0 +1,46 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+mxn \uc0\u54665 \uc0\u47148 \uc0\u50640 \uc0\u49436  \uc0\u44050 \uc0\u51012  \uc0\u52286 \uc0\u50500 \uc0\u45236 \uc0\u45716  \uc0\u54952 \uc0\u50984 \uc0\u51201 \uc0\u51064  \uc0\u50508 \uc0\u44256 \uc0\u47532 \uc0\u51608 \uc0\u51012  \uc0\u44396 \uc0\u54788 \uc0\u54616 \uc0\u46972 . \uc0\u54665 \uc0\u47148 \uc0\u51008  \uc0\u50812 \uc0\u51901 \uc0\u50640 \uc0\u49436 \uc0\u50724 \uc0\u47480 \uc0\u51901 , \uc0\u50948 \uc0\u50640 \uc0\u49436  \uc0\u50500 \uc0\u47000  \uc0\u50724 \uc0\u47492 \uc0\u52264 \uc0\u49692 \uc0\u51004 \uc0\u47196  \uc0\u51221 \uc0\u47148 \uc0\u46104 \uc0\u50612  \uc0\u51080 \uc0\u45796 .\
+\
+Input: matrix = [[1,4,7,11,15],[2,5,8,12,19],[3,6,9,16,22],[10,13,14,17,24],[18,21,23,26,30]], target = 5\
+Output: true\
+\
+\
+1.\uc0\u51060 \uc0\u51652  \uc0\u44160 \uc0\u49353 \
+import bisect\
+\
+class Solution:\
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:\
+        for m in matrix:\
+            if m[0] <= target <= m[-1]:\
+                i = bisect.bisect_left(m, target)\
+                if 0 <= i < len(m) and m[i] == target:\
+                    return True\
+        return False\
+\
+import bisect\
+\
+class Solution:\
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:\
+        if not matrix:\
+            return False\
+        row = 0\
+        col = len(matrix[0]) - 1\
+        while row <= len(matrix) - 1 and col >= 0:\
+            if target == matrix[row][col]:\
+                return True\
+            elif target < matrix[row][col]:\
+                col -= 1\
+            elif target > matrix[row][col]:\
+                row += 1\
+        return False\
+\
+2.\uc0\u54028 \uc0\u51060 \uc0\u50028  \uc0\u45796 \uc0\u50868 \
+class Solution:\
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:\
+        return any([target in m for m in matrix])\
+}

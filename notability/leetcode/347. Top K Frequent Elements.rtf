@@ -1,0 +1,45 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable}
+{\*\listoverridetable}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u48712 \uc0\u46020 \uc0\u49688 \uc0\u44032  \uc0\u45458 \uc0\u51008  \uc0\u50836 \uc0\u49548 \uc0\u47484  k\uc0\u48264 \uc0\u51704  \uc0\u44620 \uc0\u51648  \uc0\u52628 \uc0\u52636 \uc0\u54616 \uc0\u46972 .\
+\
+Input: nums = [1,1,1,2,2,3], k = 2\
+Output: [1,2]\
+\
+1.Counter\
+class Solution:\
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:\
+        result = [i[0] for i in collections.Counter(nums).most_common(k)]\
+        return result\
+\
+2.heapq\
+class Solution:\
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:\
+        freqs = collections.Counter(nums)\
+        freqs_heap = []\
+        for f in freqs:\
+            heapq.heappush(freqs_heap, (-freqs[f], f))\
+        topk = []\
+        for _ in range(k):\
+            topk.append(heapq.heappop(freqs_heap)[1])\
+        return topk\
+\
+3.\uc0\u54028 \uc0\u51060 \uc0\u50028  \uc0\u45796 \uc0\u50868 \
+class Solution:\
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:\
+        return list(zip(*collections.Counter(nums).most_common(k)))[0]\
+\
+import collections\
+\
+class Solution:\
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:\
+        return [c[0] for c in collections.Counter(nums).most_common(k)]\
+\
+import collections\
+\
+class Solution:\
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:\
+        return list(map(lambda a: a[0], collections.Counter(nums).most_common(k)))}

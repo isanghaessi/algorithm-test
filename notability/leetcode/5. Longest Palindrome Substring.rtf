@@ -1,0 +1,84 @@
+{\rtf1\ansi
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{disc\}}{\leveltext \'01\'95}{\levelnumbers;}\fi-500\li0\lin0}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{circle\}}{\leveltext \'01\uc0\u9702 _;}{\levelnumbers;}\fi-500\li500\lin500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{diamond\}}{\leveltext \'01\uc0\u9656 _;}{\levelnumbers;}\fi-500\li1000\lin1000}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{disc\}}{\leveltext \'01\'95}{\levelnumbers;}\fi-500\li1500\lin1500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{circle\}}{\leveltext \'01\uc0\u9702 _;}{\levelnumbers;}\fi-500\li2000\lin2000}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{diamond\}}{\leveltext \'01\uc0\u9656 _;}{\levelnumbers;}\fi-500\li2500\lin2500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{disc\}}{\leveltext \'01\'95}{\levelnumbers;}\fi-500\li3000\lin3000}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{circle\}}{\leveltext \'01\uc0\u9702 _;}{\levelnumbers;}\fi-500\li3500\lin3500}
+{\listlevel\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0\levelnfc23\levelnfcn23{\*\levelmarker \{diamond\}}{\leveltext \'01\uc0\u9656 _;}{\levelnumbers;}\fi-500\li4000\lin4000}
+{\listname ;}\listid638100983}
+}
+{\*\listoverridetable{\listoverride\listid638100983\listoverridecount0\ls638100983}}
+\f0\fs24 \cf0 \pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\uc0\u44032 \uc0\u51109  \uc0\u44596  \uc0\u54064 \uc0\u47536 \uc0\u46300 \uc0\u47212  \uc0\u48512 \uc0\u48516  \uc0\u47928 \uc0\u51088 \uc0\u50676 \uc0\u51012  \uc0\u52636 \uc0\u47141 \uc0\u54616 \uc0\u46972 .\
+\
+Input: s = "babad"\
+Output: "bab"\
+\	Note: "aba" is also a valid answer.\
+\
+Input: s = "cbbd"\
+Output: "bb"\
+\
+1.\uc0\u51473 \uc0\u50521 \uc0\u51012  \uc0\u51473 \uc0\u49900 \uc0\u51004 \uc0\u47196  \uc0\u54869 \uc0\u51109 \
+class Solution:\
+    def longestPalindrome(self, s: str) -> str:\
+        def expand(left, right):\
+            while left >= 0 and right <= len(s) and s[left] == s[right - 1]:\
+                left -= 1\
+                right += 1\
+            return s[left + 1:right - 1]\
+       \
+        if len(s) < 2 or s == s[::-1]:\
+            return s\
+        result = ''\
+        for i in range(len(s) - 1):\
+            result = max(result,\
+                        expand(i, i + 1),\
+                        expand(i, i + 2),\
+                        key = len)\
+        return result\
+\
+\pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi-1000\li2000
+\ls638100983\ilvl2{\listtext    \uc0\u9656    }2\uc0\u52856 , 3\uc0\u52856 \uc0\u51004 \uc0\u47196  \uc0\u53804 \uc0\u54252 \uc0\u51064 \uc0\u53552 \
+\ls638100983\ilvl2{\listtext    \uc0\u9656    }2\uc0\u44060 \uc0\u51032  \uc0\u47928 \uc0\u51088 , 3\uc0\u44060 \uc0\u51032  \uc0\u47928 \uc0\u51088 \uc0\u47196  \uc0\u49884 \uc0\u51089 \uc0\u54616 \uc0\u45716  \uc0\u44221 \uc0\u50864 \uc0\u44032  \uc0\u51080 \uc0\u44592  \uc0\u46412 \uc0\u47928 \
+\pard\tx0\tx500\tx1000\tx1500\tx2000\tx2500\tx3000\tx3500\tx4000\tx4500\tx5000\tx5500\tx6000\ql\fi0\li0
+\
+class Solution:\
+    def longestPalindrome(self, s: str) -> str:\
+        if len(s) < 2 or s == s[::-1]:\
+            return s\
+        s = ' '.join(s)\
+        result = ''\
+        for i in range(len(s)):\
+            j = 0\
+            while i - j >= 0 and i + j < len(s) and s[i - j] == s[i + j]:\
+                j += 1\
+            result = max(result, s[i - j + 1:i + j].replace(' ', ''), key = len)\
+        return result\
+\
+\
+class Solution:\
+    def longestPalindrome(self, s: str) -> str:\
+        if len(s) == 1:\
+            return s\
+        s = ' '.join(list(s))\
+        result = s[0]\
+        center = 0\
+        while center < len(s):\
+            gap = len(result) // 2\
+            while center - gap >= 0 and center + gap + 1 <= len(s) and s[center - gap: center + gap + 1] == s[center - gap: center + gap + 1][::-1]:\
+                if len(result.replace(' ', '')) < len(s[center - gap: center + gap + 1].replace(' ', '')):\
+                    result = s[center - gap: center + gap + 1]\
+                gap += 1\
+            center += 1\
+        return result.replace(' ', '')\
+\
+\
+\
+\
+\
+}
